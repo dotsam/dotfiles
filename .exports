@@ -1,5 +1,5 @@
 # Make vim the default editor.
-export EDITOR='vim';
+export EDITOR='mate';
 
 # Enable persistent REPL history for `node`.
 NODE_REPL_HISTORY_FILE=~/.node_history;
@@ -13,8 +13,9 @@ export HISTFILESIZE="${HISTSIZE}";
 export HISTCONTROL='ignoreboth';
 
 # Prefer US English and use UTF-8.
-export LANG='en_US.UTF-8';
-export LC_ALL='en_US.UTF-8';
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Highlight section titles in manual pages.
 export LESS_TERMCAP_md="${yellow}";
@@ -24,3 +25,9 @@ export MANPAGER='less -X';
 
 # Always enable colored `grep` output.
 export GREP_OPTIONS='--color=auto';
+
+# Set Colour LS Output
+export CLICOLOR=yes
+
+# Make the "sudo" prompt more useful, without requiring access to "visudo".
+export SUDO_PROMPT='[sudo] password for %u on %h: ';

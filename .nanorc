@@ -1,0 +1,9 @@
+set tabsize 2
+set autoindent
+set const
+set historylog
+set morespace
+set mouse
+set nonewlines
+set smooth
+set nowrap

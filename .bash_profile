@@ -1,3 +1,9 @@
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
 
@@ -46,3 +52,7 @@ complete -W "NSGlobalDomain" defaults;
 
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+
+# When completing cd and rmdir, only dirs should be possible option (default is
+# all files on Mac).
+complete -d cd rmdir
