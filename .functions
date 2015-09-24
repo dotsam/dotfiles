@@ -55,16 +55,16 @@ function targz() {
 }
 
 # Determine size of a file or total size of a directory
-function fs() {
+function dud() {
 	if du -b /dev/null > /dev/null 2>&1; then
 		local arg=-sbh;
 	else
 		local arg=-sh;
 	fi
 	if [[ -n "$@" ]]; then
-		du $arg -- "$@";
+		du $arg -- "$@" | sort -h;
 	else
-		du $arg .[^.]* *;
+		du $arg .[^.]* * | sort -h;
 	fi;
 }
 
@@ -197,26 +197,6 @@ function getcertnames() {
 	fi;
 }
 
-# `m` with no arguments opens the current directory in TextMate, otherwise
-# opens the given location
-function m() {
-	if [ $# -eq 0 ]; then
-		mate .;
-	else
-		mate "$@";
-	fi;
-}
-
-# `o` with no arguments opens the current directory, otherwise opens the given
-# location
-function o() {
-	if [ $# -eq 0 ]; then
-		open .;
-	else
-		open "$@";
-	fi;
-}
-
 # `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
 # the `.git` directory, listing directories first. The output gets piped into
 # `less` with options to preserve color and line numbers, unless the output is
@@ -254,14 +234,6 @@ rule () {
 	printf "%$(tput cols)s\n"|tr " " "─"}}
 }
 
-# who is using the laptop's iSight camera?
-camerausedby() {
-    echo "Checking to see who is using the iSight camera… 📷"
-    usedby=$(lsof | grep -w "AppleCamera\|USBVDC\|iSight" | awk '{printf $2"\n"}' | xargs ps)
-    echo -e "Recent camera uses:\n$usedby"
-}
-
-
 # animated gifs from any video
 # from alex sexton   gist.github.com/SlexAxton/4989674
 gifify() {
@@ -288,3 +260,47 @@ qh() {
 qt() {
     grep -ir --color=always "$*" . | less -RX
 }
+
+# OS X specific
+if [[ "$OSTYPE" == darwin* ]]; then
+
+	# who is using the laptop's iSight camera?
+	camerausedby() {
+	    echo "Checking to see who is using the iSight camera… 📷"
+	    usedby=$(lsof | grep -w "AppleCamera\|USBVDC\|iSight" | awk '{printf $2"\n"}' | xargs ps)
+	    echo -e "Recent camera uses:\n$usedby"
+	}
+
+	# `o` with no arguments opens the current directory, otherwise opens the given
+	# location
+	function o() {
+		if [ $# -eq 0 ]; then
+			open .;
+		else
+			open "$@";
+		fi;
+	}
+
+	# `m` with no arguments opens the current directory in TextMate, otherwise
+	# opens the given location
+	function m() {
+		if [ $# -eq 0 ]; then
+			mate .;
+		else
+			mate "$@";
+		fi;
+	}
+
+else
+
+	# `o` with no arguments opens the current directory, otherwise opens the given
+	# location
+	function o() {
+		if [ $# -eq 0 ]; then
+			xdg-open .;
+		else
+			xdg-open "$@";
+		fi;
+	}
+
+fi

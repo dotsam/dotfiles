@@ -7,7 +7,8 @@ git submodule update --init
 
 function doIt() {
 	rsync --exclude ".git/" --exclude ".gitmodules" --exclude ".DS_Store" --exclude "bootstrap.sh" \
-		--exclude "README.md" --exclude "LICENSE-MIT.txt" --exclude "firstrun.sh" -avh --no-perms . ~;
+		--exclude "README.md" --exclude "LICENSE-MIT.txt" --exclude "firstrun.sh" \
+		--exclude "bootstrap_cask.sh" -avh --no-perms . ~;
 	source ~/.bash_profile;
 }
 
