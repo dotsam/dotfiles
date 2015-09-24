@@ -52,10 +52,11 @@ echo 'Installing command line and gui apps/tools from Homebrew/Cask'
 
 # change to bash 4 (installed by homebrew)
 echo 'Switching you to bash 4'
-BASHPATH=$(brew --prefix)/bin/bash
-sudo echo $BASHPATH >> /etc/shells
-chsh -s $BASHPATH # will set for current user only.
-echo $BASH_VERSION # should be 4.x not the old 3.2.X
+echo 'NOPE! Rootless on 10.11 prevents editing /etc/shells. Do it in singleuser?'
+#BASHPATH=$(brew --prefix)/bin/bash
+#sudo echo $BASHPATH >> /etc/shells
+#chsh -s $BASHPATH # will set for current user only.
+#echo $BASH_VERSION # should be 4.x not the old 3.2.X
 
 # Type `git open` to open the GitHub page or website for a repository.
 echo 'Installing git-open'
@@ -63,12 +64,12 @@ npm install -g git-open
 
 # set up textmate symlink
 echo 'Setting up TextMate mate alias'
-ln -sf ln ~/Applications/TextMate.app/Contents/Resources/mate ~/bin/mate
-
-# os x defaults
-echo 'Setting OS X defaults'
-sh .osx
+ln -sf ~/Applications/TextMate.app/Contents/Resources/mate ~/bin/mate
 
 # initial copy of dotfiles
 echo 'Copying dotfiles'
 ./bootstrap.sh
+
+# os x defaults
+echo 'Setting OS X defaults'
+sh .osx

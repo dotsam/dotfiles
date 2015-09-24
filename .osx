@@ -18,8 +18,17 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
 
+# enable feedback with volume change
+defaults write com.apple.sound.beep.feedback -bool true
+
+# enable power chime
+defaults write com.apple.PowerChime ChimeOnAllHardware -bool true
+
 # Disable transparency in the menu bar and elsewhere on Yosemite
-defaults write com.apple.universalaccess reduceTransparency -bool true
+#defaults write com.apple.universalaccess reduceTransparency -bool true
+
+# Set screensaver
+defaults -currentHost write com.apple.screensaver moduleDict -dict moduleName "Flurry" path "/System/Library/Screen Savers/Flurry.saver" type -int 0
 
 # Menu bar: hide the Time Machine, Volume, and User icons
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
@@ -30,12 +39,18 @@ defaults write com.apple.systemuiserver menuExtras -array \
   "/System/Library/CoreServices/Menu Extras/Displays.menu"\
   "/Applications/Utilities/Keychain Access.app/Contents/Resources/Keychain.menu"\
   "/System/Library/CoreServices/Menu Extras/VPN.menu"\
-	"/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
-	"/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-	"/System/Library/CoreServices/Menu Extras/Battery.menu" \
-	"/System/Library/CoreServices/Menu Extras/Volume.menu" \
-	"/System/Library/CoreServices/Menu Extras/Clock.menu" \
+  "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
+  "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
+  "/System/Library/CoreServices/Menu Extras/Battery.menu" \
+  "/System/Library/CoreServices/Menu Extras/Volume.menu" \
+  "/System/Library/CoreServices/Menu Extras/Clock.menu" \
   "/System/Library/CoreServices/Menu Extras/User.menu" 
+
+# Show user menu as account name
+defaults write NSGlobalDomain userMenuExtraStyle -int 1
+
+# User 24-hour time
+defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
 
 # Show remaining battery time; hide percentage
 defaults write com.apple.menuextra.battery ShowPercent -string "NO"
@@ -50,6 +65,9 @@ defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
 # Show scrollbars when scrolling
 defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 # Possible values: `WhenScrolling`, `Automatic` and `Always`
+
+# Disable shaking mouse cursor to locate
+defaults write NSGlobalDomain CGDisableCursorLocationMagnification -bool true
 
 # Disable smooth scrolling
 # (Uncomment if you’re on an older Mac that messes up the animation)
@@ -160,7 +178,7 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 0
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 0
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 0'
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 0
 
 # Increase sound quality for Bluetooth headphones/headsets
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
@@ -373,7 +391,7 @@ defaults write com.apple.dock show-process-indicators -bool true
 #defaults write com.apple.dock persistent-apps -array
 
 # Don’t animate opening applications from the Dock
-#defaults write com.apple.dock launchanim -bool false
+defaults write com.apple.dock launchanim -bool false
 
 # Speed up Mission Control animations
 defaults write com.apple.dock expose-animation-duration -float 0.1
@@ -381,6 +399,9 @@ defaults write com.apple.dock expose-animation-duration -float 0.1
 # Don’t group windows by application in Mission Control
 # (i.e. use the old Exposé behavior instead)
 defaults write com.apple.dock expose-group-by-app -bool false
+
+# Set multiple displays to share the same space
+defaults write com.apple.spaces spans-displays -bool true
 
 # Disable Dashboard
 defaults write com.apple.dashboard mcx-disabled -bool true
@@ -467,6 +488,10 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 
 # Show Safari’s bookmarks bar by default
 defaults write com.apple.Safari ShowFavoritesBar -bool true
+defaults write com.apple.Safari ShowFavoritesBar-v2 -bool true
+
+# Always show tab bar
+defaults write com.apple.Safari AlwaysShowTabBar -bool true
 
 # Show Safari’s sidebar in Top Sites
 defaults write com.apple.Safari ShowSidebarInTopSites -bool true
@@ -565,7 +590,7 @@ sudo mdutil -i on / > /dev/null
 sudo mdutil -E / > /dev/null
 
 # Enable the locate database
-sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
+sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist 2> /dev/null
 
 ###############################################################################
 # Terminal & iTerm 2                                                          #
@@ -765,10 +790,7 @@ cp -r init/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ 
 # TextMate                                                                    #
 ###############################################################################
 
-# Copy the theme file over
-cp "~/init/Solarized (dark).tmTheme" "~/Library/Application Support/TextMate/Themes"
-
-# TODO - Can we set a preference somewhere for this?
+# TODO
 
 ###############################################################################
 # Transmission.app                                                            #
@@ -781,7 +803,7 @@ defaults write org.m0k.transmission IncompleteDownloadFolder -string "${HOME}/Do
 
 # And save the downloads in ~/Downloads
 defaults write org.m0k.transmission DownloadChoice -string "Constant"
-defaults write org.m0k.transmission DownloadFolder -string "${HOME}/Downloads"'
+defaults write org.m0k.transmission DownloadFolder -string "${HOME}/Downloads"
 
 # Don’t prompt for confirmation before downloading
 defaults write org.m0k.transmission DownloadAsk -bool false
