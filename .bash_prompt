@@ -25,16 +25,18 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-PROMPT_FQDN = 'samedwards\.ca';
+if [ -z "$PROMPT_FQDN" ]; then
+	PROMPT_FQDN="samedwards\.ca";
+fi;
 
 if [ "$color_prompt" = yes ]; then
     _ROOT_COLOR=31  # red
     _USER_COLOR=32  # green
 
     if [ "`id -u`" -eq 0 ]; then
-	PS1="\[\033[01;${_ROOT_COLOR}m\]$(hostname -f|sed 's/\.${PROMPT_FQDN}//')\[\033[01;34m\] \w #\[\033[00m\] "
+	PS1="\[\033[01;${_ROOT_COLOR}m\]$(hostname -f|sed 's/\.'${PROMPT_FQDN}'//')\[\033[01;34m\] \w #\[\033[00m\] "
     else
-	PS1="\[\033[01;${_USER_COLOR}m\]\u@$(hostname -f|sed 's/\.${PROMPT_FQDN}//')\[\033[01;34m\] \w $\[\033[00m\] "
+	PS1="\[\033[01;${_USER_COLOR}m\]\u@$(hostname -f|sed 's/\.'${PROMPT_FQDN}'//')\[\033[01;34m\] \w $\[\033[00m\] "
     fi
 else
     PS1='\u@\h: \w \$ '
