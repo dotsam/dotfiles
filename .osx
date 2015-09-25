@@ -582,6 +582,7 @@ defaults write com.apple.spotlight orderedItems -array \
 	'{"enabled" = 1;"name" = "MENU_EXPRESSION";}' \
 	'{"enabled" = 1;"name" = "MENU_WEBSEARCH";}' \
 	'{"enabled" = 1;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
+
 # Load new settings before rebuilding the index
 killall mds > /dev/null 2>&1
 # Make sure indexing is enabled for the main volume
@@ -762,24 +763,6 @@ defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool t
 defaults write ~/Library/Preferences/org.gpgtools.gpgmail SignNewEmailsByDefault -bool false
 
 ###############################################################################
-# Opera & Opera Developer                                                     #
-###############################################################################
-
-# Expand the print dialog by default
-#defaults write com.operasoftware.Opera PMPrintingExpandedStateForPrint2 -boolean true
-#defaults write com.operasoftware.OperaDeveloper PMPrintingExpandedStateForPrint2 -boolean true
-
-###############################################################################
-# SizeUp.app                                                                  #
-###############################################################################
-
-# Start SizeUp at login
-#defaults write com.irradiatedsoftware.SizeUp StartAtLogin -bool true
-
-# Don’t show the preferences window on next start
-#defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false
-
-###############################################################################
 # Sublime Text                                                                #
 ###############################################################################
 
@@ -842,13 +825,39 @@ defaults write com.twitter.twitter-mac ShowFullNames -bool true
 defaults write com.twitter.twitter-mac HideInBackground -bool true
 
 ###############################################################################
+# Spectacle.app                                                               #
+###############################################################################
+
+# Don't show menubar item
+defaults write com.divisiblebyzero.Spectacle StatusItemEnabled -bool false
+
+# Yes yes, we know, there's no icon visible anywhere
+defaults write com.divisiblebyzero.Spectacle BackgroundAlertSuppressed -bool true
+
+# All clear on the auto-updates, boss
+defaults write com.divisiblebyzero.Spectacle SUEnableAutomaticChecks -bool true
+defaults write com.divisiblebyzero.Spectacle SUHasLaunchedBefore -bool true
+
+###############################################################################
+# Flux.app                                                                    #
+###############################################################################
+
+# Not working for the weekend
+defaults write org.herf.Flux sleepLate -bool true
+
+# I guess you know where I live now
+defaults write org.herf.Flux location -string "48.420900,-123.354000"
+defaults write org.herf.Flux locationTextField -string "48.4209,-123.354"
+defaults write org.herf.Flux locationType -string "L"
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
-	"Dock" "Finder" "Google Chrome" "Google Chrome Canary" "Mail" "Messages" \
-	"Opera" "Safari" "SizeUp" "Spectacle" "SystemUIServer" "Terminal" \
-	"Transmission" "Twitter" "iCal"; do
+	"Dock" "Finder" "Flux" "Google Chrome" "Google Chrome Canary" "Mail" \
+	"Messages" "Safari" "Spectacle" "SystemUIServer" "Terminal" "Transmission" \
+	"Twitter" "iCal"; do
 	killall "${app}" > /dev/null 2>&1
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
