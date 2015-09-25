@@ -11,7 +11,8 @@ brew cask install spectacle
 brew cask install flux
 brew cask install istat-menus
 brew cask install witch
-brew cask install gpgtools
+# gpgtools not 10.11 ready yet (mail plugin crashes)
+#brew cask install gpgtools
 brew cask install maddthesane-perian
 brew cask install dropbox
 brew cask install xquartz
