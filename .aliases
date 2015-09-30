@@ -98,6 +98,8 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 # du SI sizes by default
 alias df="df -h"
 
+alias rebootfv="sudo fdesetup authrestart"
+
 # OS X specific
 if [[ "$OSTYPE" == darwin* ]]; then
 

@@ -850,6 +850,49 @@ defaults write org.herf.Flux location -string "48.420900,-123.354000"
 defaults write org.herf.Flux locationTextField -string "48.4209,-123.354"
 defaults write org.herf.Flux locationType -string "L"
 
+# Wake up at 6:30am
+defaults write org.herf.Flux steptime -int 26
+defaults write org.herf.Flux wakeTime -int 390
+
+# Don't blind yourself if you disable
+defaults write org.herf.Flux melanopicDisable -bool true
+
+###############################################################################
+# Tweetbot.app                                                                #
+###############################################################################
+
+defaults write com.tapbots.TweetbotMac badgesEnabled -bool false
+defaults write com.tapbots.TweetbotMac dateFormatType -int 0
+defaults write com.tapbots.TweetbotMac displayNameType -int 3
+defaults write com.tapbots.TweetbotMac openURLInBackground -bool true
+defaults write com.tapbots.TweetbotMac quoteFormatType -int 0
+defaults write com.tapbots.TweetbotMac showStatusItem -int 0
+defaults write com.tapbots.TweetbotMac soundType -int 0
+defaults write com.tapbots.TweetbotMac streamingEnabled -bool true
+defaults write com.tapbots.TweetbotMac streamingPinToTopEnabled -bool true
+
+###############################################################################
+# Carousel.app                                                                #
+###############################################################################
+
+defaults write com.mobelux.Carousel com.mobelux.kBadgeNotificationUserDefault -bool false
+defaults write com.mobelux.Carousel com.mobelux.kGrowlNotificationUserDefault -bool false
+defaults write com.mobelux.Carousel com.mobelux.kKeepScrolledToTopUserDefault -bool true
+defaults write com.mobelux.Carousel com.mobelux.kNewsletterSignupShownDefault -bool true
+
+###############################################################################
+# Movist.app                                                                  #
+###############################################################################
+
+defaults write com.movist.Movist showRemainedTime -bool true
+defaults write com.movist.Movist singleWindowMode -bool false
+defaults write com.movist.Movist supportAppleRemote -bool false
+defaults write com.movist.Movist themeName -string "Default 2"
+defaults write com.movist.Movist useCustomLionFullScreenAnimation -bool true
+defaults write com.movist.Movist useLionFullScreen -bool false
+defaults write com.movist.Movist useSubtitle -bool false
+defaults write com.movist.Movist viewDuration -bool false
+
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
