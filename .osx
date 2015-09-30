@@ -850,6 +850,13 @@ defaults write org.herf.Flux location -string "48.420900,-123.354000"
 defaults write org.herf.Flux locationTextField -string "48.4209,-123.354"
 defaults write org.herf.Flux locationType -string "L"
 
+# Wake up at 6:30am
+defaults write org.herf.Flux steptime -int 26
+defaults write org.herf.Flux wakeTime -int 390
+
+# Don't blind yourself if you disable
+defaults write org.herf.Flux melanopicDisable -bool true
+
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
