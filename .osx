@@ -516,6 +516,9 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 # Enable status bar
 defaults write com.apple.Safari ShowOverlayStatusBar -bool true
 
+# Use ⌘ + Shift + E to reload with iPad user agent to get HTML5 video sometimes
+defaults write com.apple.safari NSUserKeyEquivalents -dict-add "Safari iOS 8.1 \\U2014 iPad" -string "@$e"
+
 ###############################################################################
 # Mail                                                                        #
 ###############################################################################
