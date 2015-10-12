@@ -1,5 +1,5 @@
 # Make vim the default editor.
-export EDITOR='mate';
+export EDITOR='mate -w';
 
 # Enable persistent REPL history for `node`.
 export NODE_REPL_HISTORY_FILE=~/.node_history;
