@@ -12,7 +12,7 @@ brew cask install flux
 brew cask install istat-menus
 brew cask install witch
 # gpgtools not 10.11 ready yet (mail plugin crashes)
-#brew cask install gpgtools
+brew cask install gpgtools
 brew cask install maddthesane-perian
 brew cask install dropbox
 brew cask install xquartz
@@ -20,7 +20,6 @@ brew cask install xquartz
 # multimedia
 brew cask install handbrake
 brew cask install vlc
-brew cask install soundflower
 brew cask install linein
 brew cask install airfoil
 brew cask install mpeg-streamclip
@@ -40,6 +39,8 @@ brew cask install slack
 brew cask install transmit
 brew cask install transmission
 brew cask install the-unarchiver
+brew cask install choosy
+brew cask install harvest
 
 # quicklook plugins
 brew cask install betterzipql
