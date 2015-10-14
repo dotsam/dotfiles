@@ -11,14 +11,14 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until the script has finished.
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-echo 'Enter new hostname of the machine:'
-  read hostname
-  echo "Setting new hostname to $hostname..."
-  scutil --set HostName "$hostname"
-  compname=$(sudo scutil --get HostName | tr '-' '.')
-  echo "Setting computer name to $compname"
-  scutil --set ComputerName "$compname"
-  sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$compname"
+#echo 'Enter new hostname of the machine:'
+#  read hostname
+#  echo "Setting new hostname to $hostname..."
+#  scutil --set HostName "$hostname"
+#  compname=$(sudo scutil --get HostName | tr '-' '.')
+#  echo "Setting computer name to $compname"
+#  scutil --set ComputerName "$compname"
+#  sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$compname"
 
 ##############################################################################################################
 ### XCode Command Line Tools
@@ -63,8 +63,8 @@ echo 'Installing git-open'
 npm install -g git-open
 
 # set up textmate symlink
-echo 'Setting up TextMate mate alias'
-ln -sf ~/Applications/TextMate.app/Contents/Resources/mate ~/bin/mate
+#echo 'Setting up TextMate mate alias'
+#ln -sf ~/Applications/TextMate.app/Contents/Resources/mate ~/bin/mate
 
 # initial copy of dotfiles
 echo 'Copying dotfiles'
