@@ -23,6 +23,7 @@ brew cask install vlc
 brew cask install linein
 brew cask install airfoil
 brew cask install mpeg-streamclip
+brew cask install fission
 
 # apps
 brew cask install nvalt
@@ -41,6 +42,8 @@ brew cask install transmission
 brew cask install the-unarchiver
 brew cask install choosy
 brew cask install harvest
+brew cask install boxer
+brew cask install fluid
 
 # quicklook plugins
 brew cask install betterzipql
