@@ -152,6 +152,8 @@ if [[ "$OSTYPE" == darwin* ]]; then
 
   alias localip="ipconfig getifaddr en0"
 
+  alias lastwake="sysctl -a | grep waketime | cut -d ' ' -f 10-"
+
 else
 
   alias local-ip="ifconfig | grep 'inet addr' | grep -v '127.0.0.1' | cut -d: -f2 | cut -d' ' -f1"
