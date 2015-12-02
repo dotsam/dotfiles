@@ -145,6 +145,11 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 #sudo rm -rf /System/Library/CoreServices/DefaultDesktop.jpg
 #sudo ln -s /path/to/your/image /System/Library/CoreServices/DefaultDesktop.jpg
 
+# Replace Duplicate with Save As and don't save changes in original document
+defaults write NSGlobalDomain NSDocumentSaveAsShouldRevert -bool true
+defaults write com.apple.universalaccess com.apple.custommenu.apps -array-add 'NSGlobalDomain'
+defaults write NSGlobalDomain NSUserKeyEquivalents -dict-add "Duplicate" -string "@~\$s" "Save As..." -string "@\$s"
+
 ###############################################################################
 # SSD-specific tweaks                                                         #
 ###############################################################################
@@ -517,7 +522,8 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 defaults write com.apple.Safari ShowOverlayStatusBar -bool true
 
 # Use ⌘ + Shift + E to reload with iPad user agent to get HTML5 video sometimes
-defaults write com.apple.safari NSUserKeyEquivalents -dict-add "Safari iOS 8.1 \\U2014 iPad" -string "@$e"
+defaults write com.apple.universalaccess com.apple.custommenu.apps -array-add 'com.apple.Safari'
+defaults write com.apple.safari NSUserKeyEquivalents -dict-add "Safari iOS 8.1 \\U2014 iPad" -string "@\$e"
 
 ###############################################################################
 # Mail                                                                        #
