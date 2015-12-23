@@ -150,6 +150,9 @@ defaults write NSGlobalDomain NSDocumentSaveAsShouldRevert -bool true
 defaults write com.apple.universalaccess com.apple.custommenu.apps -array-add 'NSGlobalDomain'
 defaults write NSGlobalDomain NSUserKeyEquivalents -dict-add "Duplicate" -string "@~\$s" "Save As..." -string "@\$s"
 
+# Disable Photos/Image Capture from opening when photo media is detected
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool YES
+
 ###############################################################################
 # SSD-specific tweaks                                                         #
 ###############################################################################
@@ -296,8 +299,8 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 # Enable spring loading for directories
 defaults write NSGlobalDomain com.apple.springing.enabled -bool true
 
-# Remove the spring loading delay for directories
-defaults write NSGlobalDomain com.apple.springing.delay -float 0
+# Shorten the spring loading delay for directories
+defaults write NSGlobalDomain com.apple.springing.delay -float 0.5
 
 # Avoid creating .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
@@ -369,7 +372,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # Enable highlight hover effect for the grid view of a stack (Dock)
 defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
-# Set the icon size of Dock items to 34 pixels
+# Set the icon size of Dock items to 46 pixels
 defaults write com.apple.dock tilesize -int 46
 
 # Change minimize/maximize window effect
@@ -553,18 +556,13 @@ defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
 
 # Hide Spotlight tray-icon (and subsequent helper)
 #sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+
 # Disable Spotlight indexing for any volume that gets mounted and has not yet
 # been indexed before.
 # Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
 #sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
+
 # Change indexing order and disable some search results
-# Yosemite-specific search results (remove them if your are using OS X 10.9 or older):
-# 	MENU_DEFINITION
-# 	MENU_CONVERSION
-# 	MENU_EXPRESSION
-# 	MENU_SPOTLIGHT_SUGGESTIONS (send search queries to Apple)
-# 	MENU_WEBSEARCH             (send search queries to Apple)
-# 	MENU_OTHER
 defaults write com.apple.spotlight orderedItems -array \
 	'{"enabled" = 1;"name" = "APPLICATIONS";}' \
 	'{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
