@@ -874,7 +874,7 @@ defaults write com.tapbots.TweetbotMac showStatusItem -int 0
 defaults write com.tapbots.TweetbotMac soundType -int 0
 defaults write com.tapbots.TweetbotMac streamingEnabled -bool true
 defaults write com.tapbots.TweetbotMac streamingPinToTopEnabled -bool true
-defaults write com.tapbots.TweetbotMac openURLsDirectly -bool true
+defaults write com.tapbots.TweetbotMac OpenURLsDirectly -bool true
 
 ###############################################################################
 # Carousel.app                                                                #
