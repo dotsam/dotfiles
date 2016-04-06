@@ -63,7 +63,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
 fi
 
 if [[ -v SSH_CLIENT ]]; then
-  if !(netstat --numeric-ports -luet | grep $(whoami) | grep $(netstat -aent | grep $(echo $SSH_CLIENT | awk '{ print $2}') | awk '{ print substr($8,0,5)}')) then
+  if !(netstat --numeric-ports -luet | grep $(whoami) | grep $(netstat -aent | grep $(echo $SSH_CLIENT | awk '{ print $2}') | awk '{ print substr($8,0,5)}')); then
     export EDITOR='rmate';
   fi
     
