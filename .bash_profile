@@ -32,10 +32,10 @@ for option in autocd globstar; do
 done;
 
 # Add tab completion for many Bash commands
-if which brew > /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
-	source "$(brew --prefix)/share/bash-completion/bash_completion";
-elif [ -f /etc/bash_completion ]; then
+if which brew > /dev/null 2>&1 && [ -f /etc/bash_completion ]; then
 	source /etc/bash_completion;
+elif [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
+  source "$(brew --prefix)/share/bash-completion/bash_completion";
 fi;
 
 # Enable tab completion for `g` by marking it as an alias for `git`
@@ -48,6 +48,7 @@ fi;
 
 # OS X specific
 if [[ "$OSTYPE" == darwin* ]]; then
+  export EDITOR='mate';
 
   # Add tab completion for `defaults read|write NSGlobalDomain`
   # You could just use `-g` instead, but I like being explicit
@@ -56,8 +57,14 @@ if [[ "$OSTYPE" == darwin* ]]; then
   # Add `killall` tab completion for common apps
   complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
 
-  # When completing cd and rmdir, only dirs should be possible option (default is
-  # all files on Mac).
+  # When completing cd and rmdir, only dirs should be possible option (default is all files on Mac).
   complete -d cd rmdir
 
+fi
+
+if [[ -v SSH_CLIENT ]]; then
+  if !(netstat --numeric-ports -luet | grep $(whoami) | grep $(netstat -aent | grep $(echo $SSH_CLIENT | awk '{ print $2}') | awk '{ print substr($8,0,5)}')) then
+    export EDITOR='rmate';
+  fi
+    
 fi
