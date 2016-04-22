@@ -32,10 +32,10 @@ for option in autocd globstar; do
 done;
 
 # Add tab completion for many Bash commands
-if which brew > /dev/null 2>&1 && [ -f /etc/bash_completion ]; then
-	source /etc/bash_completion;
-elif [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
-  source "$(brew --prefix)/share/bash-completion/bash_completion";
+if which brew > /dev/null 2>&1 && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
+	source "$(brew --prefix)/share/bash-completion/bash_completion";
+elif [ -f /etc/bash_completion ]; then
+  source /etc/bash_completion;
 fi;
 
 # Enable tab completion for `g` by marking it as an alias for `git`
@@ -63,8 +63,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
 fi
 
 if [[ -v SSH_CLIENT ]]; then
-  if !(netstat --numeric-ports -luet | grep $(whoami) | grep $(netstat -aent | grep $(echo $SSH_CLIENT | awk '{ print $2}') | awk '{ print substr($8,0,5)}')); then
+  if [[ $(netstat --numeric-ports -luet | grep $(whoami) | grep $(netstat -aent | grep $(echo $SSH_CLIENT | awk '{ print $2}') | awk '{ print substr($8,0,5)}')) ]]; then
     export EDITOR='rmate';
-  fi
-    
+  fi    
 fi
