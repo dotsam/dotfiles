@@ -98,25 +98,23 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 # du SI sizes by default
 alias df="df -h"
 
-alias rebootfv="sudo fdesetup authrestart"
+# Recursively delete `.DS_Store` files
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
 # OS X specific
 if [[ "$OSTYPE" == darwin* ]]; then
 
   # Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
-  alias update='sudo softwareupdate -i -a; brew update; brew upgrade --all; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update'
+  alias update='sudo softwareupdate -i -a; brew update; brew upgrade --all; brew cleanup; npm install npm -g; npm update -g; gem update --system; gem update'
 
   # Flush Directory Service cache
-  alias flushdns="dscacheutil -flushcache && killall -HUP mDNSResponder"
+  alias flushdns="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
 
   # Clean up LaunchServices to remove duplicates in the “Open With” menu
   alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
 
   # Trim new lines and copy to clipboard
   alias c="tr -d '\n' | pbcopy"
-
-  # Recursively delete `.DS_Store` files
-  alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
   # Empty the Trash on all mounted volumes and the main HDD.
   # Also, clear Apple’s System Logs to improve shell startup speed.
@@ -153,6 +151,8 @@ if [[ "$OSTYPE" == darwin* ]]; then
   alias localip="ipconfig getifaddr en0"
 
   alias lastwake="sysctl -a | grep waketime | cut -d ' ' -f 10-"
+
+	alias rebootfv="sudo fdesetup authrestart"
 
 else
 
