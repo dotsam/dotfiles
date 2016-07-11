@@ -74,7 +74,7 @@ if [ -f "$(brew --prefix nvm)/nvm.sh" ]; then
   . "$(brew --prefix nvm)/nvm.sh"
   # use nvm-auto-switcher if installed
   if [ -f "$(brew --prefix nvm-auto-switch)/nvm-auto-switch.sh" ]; then
-    . "$(brew --prefix nvm)/nvm-auto-switch.sh"
+    . "$(brew --prefix nvm-auto-switch)/nvm-auto-switch.sh"
   fi
 fi
 
