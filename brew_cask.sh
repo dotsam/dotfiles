@@ -15,6 +15,7 @@ brew cask install gpgtools
 brew cask install maddthesane-perian
 brew cask install dropbox
 brew cask install xquartz
+brew cask install keepingyouawake
 
 # multimedia
 brew cask install handbrake
@@ -55,12 +56,13 @@ brew cask install quicklook-json
 brew cask install quicknfo
 brew cask install suspicious-package
 brew cask install webpquicklook
+brew cask install provisionql
+brew cask install qlimagesize
 
 # desktop only?
-brew cask install logitech-harmony
-brew cask install bettertouchtool
-brew cask install steam
-brew cask install backblaze
-#brew cask install couchpotato # maybe create this?
-brew cask install sabnzbd
-brew cask install plex-media-server
+#brew cask install logitech-harmony
+#brew cask install bettertouchtool
+#brew cask install steam
+#brew cask install backblaze
+#brew cask install sabnzbd
+#brew cask install plex-media-server
