@@ -67,3 +67,13 @@ if [[ $SSH_CLIENT ]]; then
     export EDITOR='rmate';
   fi    
 fi
+
+#nvm because node is just as fucked as ruby
+if [ -f "$(brew --prefix nvm)/nvm.sh" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  . "$(brew --prefix nvm)/nvm.sh"
+  #alias builtin cd function to call nvm_auto_switch everytime
+  function cd() { builtin cd "$@"; nvm_auto_switch; }
+fi
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
