@@ -72,8 +72,10 @@ fi
 if [ -f "$(brew --prefix nvm)/nvm.sh" ]; then
   export NVM_DIR="$HOME/.nvm"
   . "$(brew --prefix nvm)/nvm.sh"
-  #alias builtin cd function to call nvm_auto_switch everytime
-  function cd() { builtin cd "$@"; nvm_auto_switch; }
+  # use nvm-auto-switcher if installed
+  if [ -f "$(brew --prefix nvm-auto-switch)/nvm-auto-switch.sh" ]; then
+    . "$(brew --prefix nvm)/nvm-auto-switch.sh"
+  fi
 fi
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi

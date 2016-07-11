@@ -122,6 +122,7 @@ brew install python
 
 # Install Node Version Manager - because we are going to need to run multiple versions of node
 brew install nvm
+brew install https://raw.githubusercontent.com/lalitkapoor/nvm-auto-switch/master/homebrew/nvm-auto-switch.rb
 
 #install rbenv and ruby build
 brew install rbenv
