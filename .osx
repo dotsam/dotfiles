@@ -890,6 +890,9 @@ defaults write org.herf.Flux wakeTime -int 450
 # Don't blind yourself if you disable
 defaults write org.herf.Flux melanopicDisable -bool true
 
+# Switch to dark theme at night
+defaults write org.herf.Flux darkTheme -bool true
+
 ###############################################################################
 # Tweetbot.app                                                                #
 ###############################################################################
@@ -906,13 +909,22 @@ defaults write com.tapbots.TweetbotMac streamingPinToTopEnabled -bool true
 defaults write com.tapbots.TweetbotMac OpenURLsDirectly -bool true
 
 ###############################################################################
-# Carousel.app                                                                #
+# Grids.app                                                                #
 ###############################################################################
 
-defaults write com.mobelux.Carousel com.mobelux.kBadgeNotificationUserDefault -bool false
-defaults write com.mobelux.Carousel com.mobelux.kGrowlNotificationUserDefault -bool false
-defaults write com.mobelux.Carousel com.mobelux.kKeepScrolledToTopUserDefault -bool true
-defaults write com.mobelux.Carousel com.mobelux.kNewsletterSignupShownDefault -bool true
+defaults write com.thinktimecreations.Grids FollowMe.Remind -bool false
+defaults write com.thinktimecreations.Grids MainView.AutoTrim -bool true
+defaults write com.thinktimecreations.Grids MainView.LayoutStyle -int 1
+defaults write com.thinktimecreations.Grids MainWindow.AutoHideToolBar -int 2
+defaults write com.thinktimecreations.Grids MainWindow.HideMenuBar -bool true
+defaults write com.thinktimecreations.Grids MainWindow.MenuBarIcon -bool false
+defaults write com.thinktimecreations.Grids Notification.NotificationBadge -bool true
+defaults write com.thinktimecreations.Grids Notification.NotificationCenter -bool false
+defaults write com.thinktimecreations.Grids Notification.NotificationNews -bool true
+defaults write com.apple.mail MainView.Settings -dict-add "AutoPlayVideo" -bool false
+defaults write com.apple.mail MainView.Settings -dict-add "AutoRefreshFeed" -bool true
+defaults write com.apple.mail MainView.Settings -dict-add "ImageScale" -int 25
+defaults write com.apple.mail MainView.Settings -dict-add "Spacing" -int 0
 
 ###############################################################################
 # Movist.app                                                                  #
@@ -926,6 +938,10 @@ defaults write com.movist.Movist useCustomLionFullScreenAnimation -bool true
 defaults write com.movist.Movist useLionFullScreen -bool false
 defaults write com.movist.Movist useSubtitle -bool false
 defaults write com.movist.Movist viewDuration -bool false
+defaults write com.movist.Movist roundedCorner -bool false
+defaults write com.movist.Movist restoreLastWindow -bool true
+defaults write com.movist.Movist quitWhenLastWindowClosed -bool false
+defaults write com.movist.Movist keepMovieSettings -bool true
 
 ###############################################################################
 # Kill affected applications                                                  #
