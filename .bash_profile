@@ -69,7 +69,7 @@ if [[ $SSH_CLIENT ]]; then
 fi
 
 #nvm because node is just as fucked as ruby
-if [ -f "$(brew --prefix nvm)/nvm.sh" ]; then
+if which brew &> /dev/null && [ -f "$(brew --prefix nvm)/nvm.sh" ]; then
   export NVM_DIR="$HOME/.nvm"
   . "$(brew --prefix nvm)/nvm.sh"
   # use nvm-auto-switcher if installed
@@ -78,4 +78,4 @@ if [ -f "$(brew --prefix nvm)/nvm.sh" ]; then
   fi
 fi
 
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+if which rbenv &> /dev/null; then eval "$(rbenv init -)"; fi
