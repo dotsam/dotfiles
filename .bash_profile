@@ -59,13 +59,12 @@ if [[ "$OSTYPE" == darwin* ]]; then
 
   # When completing cd and rmdir, only dirs should be possible option (default is all files on Mac).
   complete -d cd rmdir
-
-fi
-
-if [[ $SSH_CLIENT ]]; then
-  if [[ $(netstat --numeric-ports -luet | grep $(whoami) | grep $(netstat -aent | grep $(echo $SSH_CLIENT | awk '{ print $2}') | awk '{ print substr($8,0,5)}')) ]]; then
-    export EDITOR='rmate';
-  fi    
+else
+  if [[ $SSH_CLIENT ]]; then
+    if [[ $(netstat --numeric-ports -luet | grep $(whoami) | grep $(netstat -aent | grep $(echo $SSH_CLIENT | awk '{ print $2}') | awk '{ print substr($8,0,5)}')) ]]; then
+      export EDITOR='rmate';
+    fi    
+  fi
 fi
 
 #nvm because node is just as fucked as ruby
