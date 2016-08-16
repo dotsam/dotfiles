@@ -60,12 +60,13 @@ if [[ "$OSTYPE" == darwin* ]]; then
   # When completing cd and rmdir, only dirs should be possible option (default is all files on Mac).
   complete -d cd rmdir
 
-fi
-
-if [[ $SSH_CLIENT ]]; then
-  if [[ $(netstat --numeric-ports -luet | grep $(whoami) | grep $(netstat -aent | grep $(echo $SSH_CLIENT | awk '{ print $2}') | awk '{ print substr($8,0,5)}')) ]]; then
-    export EDITOR='rmate';
-  fi    
+else
+  # Yeah, this doesn't work on OS X
+  if [[ $SSH_CLIENT ]]; then
+    if [[ $(netstat --numeric-ports -luet | grep $(whoami) | grep $(netstat -aent | grep $(echo $SSH_CLIENT | awk '{ print $2}') | awk '{ print substr($8,0,5)}')) ]]; then
+      export EDITOR='rmate';
+    fi    
+  fi
 fi
 
 #nvm because node is just as fucked as ruby
@@ -78,4 +79,8 @@ if which brew &> /dev/null && [ -f "$(brew --prefix nvm)/nvm.sh" ]; then
   fi
 fi
 
+# Init rbenv if it exists
 if which rbenv &> /dev/null; then eval "$(rbenv init -)"; fi
+
+# hcl autocomplete aliases if they exist
+[ -e "$HOME/.hcl/aliases" ] && complete -W "`cat ~/.hcl/aliases`" hcl
