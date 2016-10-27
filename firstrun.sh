@@ -3,13 +3,6 @@
 echo 'OS X System Bootstrap Script'
 echo '----------------------------'
 echo ''
-echo 'Getting your admin password up front and maintaining it'
-
-# Ask for the administrator password upfront.
-sudo -v
-
-# Keep-alive: update existing `sudo` time stamp until the script has finished.
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 #echo 'Enter new hostname of the machine:'
 #  read hostname
@@ -35,7 +28,7 @@ if [ $(xcode-select -p &> /dev/null; printf $?) -ne 0 ]; then
 	if [ $? -eq 0 ]; then
         # Prompt user to agree to the terms of the Xcode license
         # https://github.com/alrra/dotfiles/issues/10
-       sudo xcodebuild -license
+       sudo xcodebuild -license accept &> /dev/null
    fi
 fi
 ###
@@ -49,10 +42,6 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 echo 'Installing command line and gui apps/tools from Homebrew/Cask'
 ./brew.sh
 ./brew_cask.sh
-
-# Type `git open` to open the GitHub page or website for a repository.
-echo 'Installing git-open'
-npm install -g git-open
 
 # set up textmate symlink
 #echo 'Setting up TextMate mate alias'
