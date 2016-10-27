@@ -153,7 +153,9 @@ if [[ "$OSTYPE" == darwin* ]]; then
 
   alias lastwake="sysctl -a | grep waketime | cut -d ' ' -f 10-"
 
-	alias rebootfv="sudo fdesetup authrestart"
+  alias rebootfv="sudo fdesetup authrestart"
+
+  alias fixaudio="sudo kextunload /System/Library/Extensions/AppleHDA.kext;sudo kextload /System/Library/Extensions/AppleHDA.kext"
 
 else
 
