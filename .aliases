@@ -106,7 +106,7 @@ alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 if [[ "$OSTYPE" == darwin* ]]; then
 
   # Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
-  alias update='sudo softwareupdate -i -a; brew update; brew upgrade --all; brew cleanup; npm install npm -g; npm update -g; gem update --system; gem update'
+  alias update='sudo softwareupdate -i -a; brew update; brew upgrade --all; brew cleanup; npm install npm -g; npm update -g; gem update --system; gem update; gem cleanup'
 
   # Flush Directory Service cache
   alias flushdns="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
