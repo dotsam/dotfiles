@@ -1,0 +1,3 @@
+[submodule "sd"]
+	path = sd
+	url = https://github.com/dotsam/sd.git
