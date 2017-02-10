@@ -61,6 +61,15 @@ if [[ "$OSTYPE" == darwin* ]]; then
 
   # When completing cd and rmdir, only dirs should be possible option (default is all files on Mac).
   complete -d cd rmdir
+  
+  # Add ssh agent/keychain stuff on macOS
+  if ! grep -q 'UseKeychain yes$' ~/.ssh/config && ! grep -q 'AddKeysToAgent yes$' ~/.ssh/config; then
+    if grep -q 'Host \*$' ~/.ssh/config; then
+      sed -i '/Host \*$/a\ \ UseKeychain yes\n  AddKeysToAgent yes' ~/.ssh/config
+    else
+      printf "\nHost *\n  UseKeychain yes\n  AddKeysToAgent yes" >> ~/.ssh/config
+    fi
+  fi
 
 else
   # Yeah, this doesn't work on OS X
