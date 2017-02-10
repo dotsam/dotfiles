@@ -99,7 +99,7 @@ alias hosts='sudo $EDITOR /etc/hosts'
 alias undopush="git push -f origin HEAD^:master"
 
 # IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias ipext="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
 # df SI sizes by default
@@ -154,20 +154,22 @@ if [[ "$OSTYPE" == darwin* ]]; then
   # (useful when executing time-consuming commands)
   alias badge="tput bel"
 
+  # Open nvalt to todo note
   alias todo='open nvalt://find/todo'
 
+  # Alias for homebrew cask
   alias cask='brew cask' 
 
-  alias localip="ipconfig getifaddr en0"
-
+  # Print the last time the machine woke from sleep
   alias lastwake="sysctl -a | grep waketime | cut -d ' ' -f 10-"
 
+  # Reboot without having to unencrypt boot volume
   alias rebootfv="sudo fdesetup authrestart"
 
-  alias fixaudio="sudo kextunload /System/Library/Extensions/AppleHDA.kext;sudo kextload /System/Library/Extensions/AppleHDA.kext"
+  # Persistant Macbook Audio bug. Unload and reload the driver to fix
+  alias fixaudio="sudo kextunload /System/Library/Extensions/AppleHDA.kext && sudo kextload /System/Library/Extensions/AppleHDA.kext"
 
-else
-
-  alias local-ip="ifconfig | grep 'inet addr' | grep -v '127.0.0.1' | cut -d: -f2 | cut -d' ' -f1"
+  # Easy access to the airport command line tool
+  alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
 
 fi
