@@ -39,7 +39,7 @@ function prompt_git() {
         fi;
         
         # Check for changes in remote branch not in our working tree.
-        if ! $(git diff --quiet origin/$branchName..$branchName); then
+        if ! $(git diff --quiet origin/$branchName..$branchName 2> /dev/null); then
           s+='-';
         fi;
 
