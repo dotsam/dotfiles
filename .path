@@ -1,2 +1,2 @@
-export PATH="/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:$PATH"
-export PATH="$HOME/.node/bin:$PATH"
+export PATH="/usr/bin:/usr/sbin:$PATH"
+export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
