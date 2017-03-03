@@ -2,6 +2,10 @@
 
 # ~/.osx — https://mths.be/osx
 
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
 # Ask for the administrator password upfront
 sudo -v
 
@@ -33,18 +37,18 @@ defaults -currentHost write com.apple.screensaver moduleDict -dict moduleName "F
 # Menu bar: hide the Time Machine, Volume, and User icons
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
 	defaults write "${domain}" dontAutoLoad -array \
-		"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" 
+		"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
+    "/Applications/Utilities/Keychain Access.app/Contents/Resources/Keychain.menu" \
+    "/System/Library/CoreServices/Menu Extras/User.menu" \
+    "/System/Library/CoreServices/Menu Extras/Battery.menu" \
+    "/System/Library/CoreServices/Menu Extras/Clock.menu"
 done
 defaults write com.apple.systemuiserver menuExtras -array \
-  "/System/Library/CoreServices/Menu Extras/Displays.menu"\
-  "/Applications/Utilities/Keychain Access.app/Contents/Resources/Keychain.menu"\
   "/System/Library/CoreServices/Menu Extras/VPN.menu"\
+  "/System/Library/CoreServices/Menu Extras/Displays.menu"\
   "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
   "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-  "/System/Library/CoreServices/Menu Extras/Battery.menu" \
   "/System/Library/CoreServices/Menu Extras/Volume.menu" \
-  "/System/Library/CoreServices/Menu Extras/Clock.menu" \
-  "/System/Library/CoreServices/Menu Extras/User.menu" 
 
 # Show user menu as account name
 defaults write NSGlobalDomain userMenuExtraStyle -int 1
@@ -65,6 +69,9 @@ defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
 # Show scrollbars when scrolling
 defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 # Possible values: `WhenScrolling`, `Automatic` and `Always`
+
+# Disable the over-the-top focus ring animation
+defaults write NSGlobalDomain NSUseAnimatedFocusRing -bool false
 
 # Disable shaking mouse cursor to locate
 defaults write NSGlobalDomain CGDisableCursorLocationMagnification -bool true
@@ -98,13 +105,13 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
 # Display ASCII control characters using caret notation in standard text views
 # Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
-#defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
+defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 
 # Disable Resume system-wide
 #defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 
 # Disable automatic termination of inactive apps
-#defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
+defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
 # Disable the crash reporter
 #defaults write com.apple.CrashReporter DialogType -string "none"
@@ -146,9 +153,6 @@ sudo systemsetup -setrestartfreeze on
 defaults write NSGlobalDomain NSDocumentSaveAsShouldRevert -bool true
 defaults write com.apple.universalaccess com.apple.custommenu.apps -array-add 'NSGlobalDomain'
 defaults write NSGlobalDomain NSUserKeyEquivalents -dict-add "Duplicate" -string "@~\$s" "Save As..." -string "@\$s"
-
-# Disable Photos/Image Capture from opening when photo media is detected
-defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 ###############################################################################
 # SSD-specific tweaks                                                         #
@@ -199,7 +203,8 @@ defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 #defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a blazingly fast keyboard repeat rate
-#defaults write NSGlobalDomain KeyRepeat -int 0
+#defaults write NSGlobalDomain KeyRepeat -int 1
+#defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
 # Set language and text formats
 defaults write NSGlobalDomain AppleLanguages -array "en"
@@ -220,7 +225,7 @@ defaults write NSGlobalDomain AppleMetricUnits -bool true
 # Screen                                                                      #
 ###############################################################################
 
-# Require password immediately after sleep or screen saver begins
+# Require password with 5 second delay after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 5
 
@@ -297,7 +302,7 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 defaults write NSGlobalDomain com.apple.springing.enabled -bool true
 
 # Shorten the spring loading delay for directories
-defaults write NSGlobalDomain com.apple.springing.delay -float 0.5
+defaults write NSGlobalDomain com.apple.springing.delay -float 1.5
 
 # Avoid creating .DS_Store files on network or USB volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
@@ -393,6 +398,9 @@ defaults write com.apple.dock show-process-indicators -bool true
 # the Dock to launch apps.
 #defaults write com.apple.dock persistent-apps -array
 
+# Show only open applications in the Dock
+#defaults write com.apple.dock static-only -bool true
+
 # Don’t animate opening applications from the Dock
 defaults write com.apple.dock launchanim -bool false
 
@@ -415,6 +423,14 @@ defaults write com.apple.dock dashboard-in-overlay -bool true
 # Don’t automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
 
+# Some apps we want on all spaces
+defaults write com.apple.spaces app-bindings -dict-add "com.apple.ichat" -string "AllSpaces"
+defaults write com.apple.spaces app-bindings -dict-add "com.apple.mail" -string "AllSpaces"
+defaults write com.apple.spaces app-bindings -dict-add "com.getharvest.harvestx" -string "AllSpaces"
+defaults write com.apple.spaces app-bindings -dict-add "com.rafifyalda.flume-mac" -string "AllSpaces"
+defaults write com.apple.spaces app-bindings -dict-add "com.tapbots.tweetbotmac" -string "AllSpaces"
+defaults write com.apple.spaces app-bindings -dict-add "com.tinyspeck.slackmacgap" -string "AllSpaces"
+
 # Remove the auto-hiding Dock delay
 defaults write com.apple.dock autohide-delay -float 0
 # Remove the animation when hiding/showing the Dock
@@ -427,7 +443,7 @@ defaults write com.apple.dock autohide-time-modifier -float 0
 defaults write com.apple.dock showhidden -bool true
 
 # Put the Dock on the left
-defaults write com.apple.dock orientation -string "left"
+defaults write com.apple.dock orientation -string "right"
 
 # Disable the Launchpad gesture (pinch with thumb and three fingers)
 defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
@@ -456,14 +472,14 @@ sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator (
 # 10: Put display to sleep
 # 11: Launchpad
 # 12: Notification Center
-# Top left screen corner → Display Sleep
-defaults write com.apple.dock wvous-tl-corner -int 10
+# Top left screen corner → Start screen saver
+defaults write com.apple.dock wvous-tl-corner -int 5
 defaults write com.apple.dock wvous-tl-modifier -int 0
 # Top right screen corner → Desktop
 defaults write com.apple.dock wvous-tr-corner -int 4
 defaults write com.apple.dock wvous-tr-modifier -int 0
-# Bottom left screen corner → Start screen saver
-defaults write com.apple.dock wvous-bl-corner -int 5
+# Bottom left screen corner → Display Sleep
+defaults write com.apple.dock wvous-bl-corner -int 10
 defaults write com.apple.dock wvous-bl-modifier -int 0
 
 ###############################################################################
@@ -520,12 +536,45 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 # Add a context menu item for showing the Web Inspector in web views
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
+# Enable continuous spellchecking
+defaults write com.apple.Safari WebContinuousSpellCheckingEnabled -bool true
+
+# Disable auto-correct
+#defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool false
+
+# Disable AutoFill
+#defaults write com.apple.Safari AutoFillFromAddressBook -bool false
+#defaults write com.apple.Safari AutoFillPasswords -bool false
+#defaults write com.apple.Safari AutoFillCreditCardData -bool false
+#defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false
+
+# Warn about fraudulent websites
+defaults write com.apple.Safari WarnAboutFraudulentWebsites -bool true
+
+# Disable plug-ins
+defaults write com.apple.Safari WebKitPluginsEnabled -bool false
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled -bool false
+
+# Disable Java
+defaults write com.apple.Safari WebKitJavaEnabled -bool false
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
+
+# Block pop-up windows
+defaults write com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically -bool false
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool false
+
+# Enable “Do Not Track”
+defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
+
+# Update extensions automatically
+defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
+
 # Enable status bar
 defaults write com.apple.Safari ShowOverlayStatusBar -bool true
 
 # Use ⌘ + Shift + E to reload with iPad user agent to get HTML5 video sometimes
 defaults write com.apple.universalaccess com.apple.custommenu.apps -array-add 'com.apple.Safari'
-defaults write com.apple.safari NSUserKeyEquivalents -dict-add "Safari \\U2014 iOS 9.3 \\U2014 iPad" -string "@\$e"
+defaults write com.apple.safari NSUserKeyEquivalents -dict-add "Safari \\U2014 iOS 10 \\U2014 iPad" -string "@\$e"
 
 ###############################################################################
 # Mail                                                                        #
@@ -721,6 +770,9 @@ defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 defaults write com.apple.DiskUtility advanced-image-options -bool true
 
+# Auto-play videos when opened with QuickTime Player
+#defaults write com.apple.QuickTimePlayerX MGPlayMovieOnOpen -bool true
+
 ###############################################################################
 # Mac App Store                                                               #
 ###############################################################################
@@ -749,8 +801,15 @@ defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
 # Turn on app auto-update
 defaults write com.apple.commerce AutoUpdate -bool true
 
-# Allow the App Store to reboot machine on macOS updates
+# Don't allow the App Store to reboot machine on macOS updates
 defaults write com.apple.commerce AutoUpdateRestartRequired -bool false
+
+###############################################################################
+# Photos                                                                      #
+###############################################################################
+
+# Prevent Photos from opening automatically when devices are plugged in
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 ###############################################################################
 # Messages                                                                    #
@@ -768,10 +827,6 @@ defaults write com.apple.commerce AutoUpdateRestartRequired -bool false
 ###############################################################################
 # Google Chrome & Google Chrome Canary                                        #
 ###############################################################################
-
-# Allow installing user scripts via GitHub Gist or Userscripts.org
-defaults write com.google.Chrome ExtensionInstallSources -array "https://gist.githubusercontent.com/" "http://userscripts.org/*"
-defaults write com.google.Chrome.canary ExtensionInstallSources -array "https://gist.githubusercontent.com/" "http://userscripts.org/*"
 
 # Disable the all too sensitive backswipe on trackpads
 #defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
@@ -916,22 +971,20 @@ defaults write com.tapbots.TweetbotMac streamingPinToTopEnabled -bool true
 defaults write com.tapbots.TweetbotMac OpenURLsDirectly -bool true
 
 ###############################################################################
-# Grids.app                                                                #
+# Flume.app                                                                   #
 ###############################################################################
 
-defaults write com.thinktimecreations.Grids FollowMe.Remind -bool false
-defaults write com.thinktimecreations.Grids MainView.AutoTrim -bool true
-defaults write com.thinktimecreations.Grids MainView.LayoutStyle -int 1
-defaults write com.thinktimecreations.Grids MainWindow.AutoHideToolBar -int 2
-defaults write com.thinktimecreations.Grids MainWindow.HideMenuBar -bool true
-defaults write com.thinktimecreations.Grids MainWindow.MenuBarIcon -bool false
-defaults write com.thinktimecreations.Grids Notification.NotificationBadge -bool true
-defaults write com.thinktimecreations.Grids Notification.NotificationCenter -bool false
-defaults write com.thinktimecreations.Grids Notification.NotificationNews -bool true
-defaults write com.apple.mail MainView.Settings -dict-add "AutoPlayVideo" -bool false
-defaults write com.apple.mail MainView.Settings -dict-add "AutoRefreshFeed" -bool true
-defaults write com.apple.mail MainView.Settings -dict-add "ImageScale" -int 25
-defaults write com.apple.mail MainView.Settings -dict-add "Spacing" -int 0
+defaults write com.rafifyalda.flume-mac FLUApplicationConfig -dict-add "FLUApplicationConfigCellViewModeForFeedView" -bool false
+defaults write com.rafifyalda.flume-mac FLUApplicationConfig -dict-add "FLUApplicationConfigLastViewModeKey" -int 1
+defaults write com.rafifyalda.flume-mac FLUApplicationConfig -dict-add "FLUApplicationConfigShowWelcomeOnFirstLoginKey" -bool true
+defaults write com.rafifyalda.flume-mac FLUApplicationConfig -dict-add "FLUApplicationPreferencesDesignAlwaysShowTitleBar" -bool false
+defaults write com.rafifyalda.flume-mac FLUApplicationConfig -dict-add "FLUApplicationPreferencesDesignDesignMode" -bool true
+defaults write com.rafifyalda.flume-mac FLUApplicationConfig -dict-add "FLUApplicationPreferencesDesignFontSize" -int 0
+defaults write com.rafifyalda.flume-mac FLUApplicationConfig -dict-add "FLUApplicationPreferencesDesignMenuVisibility" -int 2
+defaults write com.rafifyalda.flume-mac FLUApplicationConfig -dict-add "FLUApplicationPreferencesDesignShowMediaDetails" -bool true
+defaults write com.rafifyalda.flume-mac FLUApplicationConfig -dict-add "FLUApplicationPreferencesGeneralLaunchExternalLinksInBackground" -bool true
+defaults write com.rafifyalda.flume-mac FLUApplicationConfig -dict-add "FLUApplicationPreferencesGeneralPlaySounds" -bool false
+defaults write com.rafifyalda.flume-mac FLUApplicationConfig -dict-add "FLUApplicationPreferencesGeneralShowIconIn" -bool true
 
 ###############################################################################
 # Movist.app                                                                  #
