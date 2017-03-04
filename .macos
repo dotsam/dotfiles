@@ -34,21 +34,25 @@ defaults write com.apple.PowerChime ChimeOnAllHardware -bool true
 # Set screensaver
 defaults -currentHost write com.apple.screensaver moduleDict -dict moduleName "Flurry" path "/System/Library/Screen Savers/Flurry.saver" type -int 0
 
-# Menu bar: hide the Time Machine, Volume, and User icons
-for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
-	defaults write "${domain}" dontAutoLoad -array \
-		"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
+# Menu bar: hide the Time Machine, Keychain, Battery, Clock, and User icons
+defaults -currentHost write com.apple.systemuiserver dontAutoLoad -array \
+	"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
     "/Applications/Utilities/Keychain Access.app/Contents/Resources/Keychain.menu" \
     "/System/Library/CoreServices/Menu Extras/User.menu" \
     "/System/Library/CoreServices/Menu Extras/Battery.menu" \
     "/System/Library/CoreServices/Menu Extras/Clock.menu"
-done
+
+# Menu bar: show VPN, Displays, Bluetooth, Airport, and Volume icons
 defaults write com.apple.systemuiserver menuExtras -array \
   "/System/Library/CoreServices/Menu Extras/VPN.menu"\
   "/System/Library/CoreServices/Menu Extras/Displays.menu"\
   "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
   "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
   "/System/Library/CoreServices/Menu Extras/Volume.menu" \
+
+# Don't show Siri in menubar
+defaults write com.apple.Siri StatusMenuVisible -bool false
+defaults write com.apple.systemuiserver "NSStatusItem Visible Siri" -bool false
 
 # Show user menu as account name
 defaults write NSGlobalDomain userMenuExtraStyle -int 1
@@ -185,6 +189,13 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightC
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 0
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 0
+
+# Disable force click
+defaults write com.apple.AppleMultitouchTrackpad ForceSuppressed -bool true
+defaults write com.apple.AppleMultitouchTrackpad ActuateDetents -bool false
+
+# Enable silent click
+defaults write com.apple.AppleMultitouchTrackpad ActuationStrength -int 0
 
 # Increase sound quality for Bluetooth headphones/headsets
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
