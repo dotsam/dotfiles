@@ -13,39 +13,23 @@ echo ''
 #  scutil --set ComputerName "$compname"
 #  sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$compname"
 
-##############################################################################################################
-### XCode Command Line Tools
-#      thx  https://github.com/alrra/dotfiles/blob/c2da74cc333/os/os_x/install_applications.sh#L39
+# Check for Homebrew Installation
+if ! which brew > /dev/null; then
+     # Install Homebrew
+     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi;
 
-if [ $(xcode-select -p &> /dev/null; printf $?) -ne 0 ]; then
-		echo 'Installing XCode Command Line Tools'
-    xcode-select --install &> /dev/null
-    # Wait until the XCode Command Line Tools are installed
-    while [ $(xcode-select -p &> /dev/null; printf $?) -ne 0 ]; do
-        sleep 5
-    done
-	xcode-select -p &> /dev/null
-	if [ $? -eq 0 ]; then
-        # Prompt user to agree to the terms of the Xcode license
-        # https://github.com/alrra/dotfiles/issues/10
-       sudo xcodebuild -license accept &> /dev/null
-   fi
-fi
-###
-##############################################################################################################
+# Update Homebrew
+brew update
 
-# install homebrew
-echo 'Installing Homebrew'
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# Upgrade any already-installed formulae.
+brew upgrade
 
-# install things from homebrew
-echo 'Installing command line and gui apps/tools from Homebrew/Cask'
-./brew.sh
-./brew_cask.sh
+# Install everything inside Brewfile
+brew bundle
 
-# set up textmate symlink
-#echo 'Setting up TextMate mate alias'
-#ln -sf ~/Applications/TextMate.app/Contents/Resources/mate ~/bin/mate
+# Remove outdated versions from the cellar.
+brew cleanup
 
 # initial copy of dotfiles
 echo 'Copying dotfiles'
@@ -54,3 +38,11 @@ echo 'Copying dotfiles'
 # os x defaults
 echo 'Setting OS X defaults'
 sh .osx
+
+ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
+
+# Switch to using brew-installed bash as default shell
+if ! fgrep -q '/usr/local/bin/bash' /etc/shells; then
+  echo '/usr/local/bin/bash' | sudo tee -a /etc/shells;
+  chsh -s /usr/local/bin/bash;
+fi;
