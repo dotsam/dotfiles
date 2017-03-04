@@ -107,7 +107,7 @@ cask 'witch'
 #cask 'gpgtools'
 cask 'keepingyouawake'
 cask 'keybase'
-cask 'sequal-pro'
+cask 'sequel-pro'
 cask 'nagstamon'
 
 # Multimedia?
