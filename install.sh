@@ -1,18 +1,5 @@
 #!/usr/bin/env bash
 
-echo 'OS X System Bootstrap Script'
-echo '----------------------------'
-echo ''
-
-#echo 'Enter new hostname of the machine:'
-#  read hostname
-#  echo "Setting new hostname to $hostname..."
-#  scutil --set HostName "$hostname"
-#  compname=$(sudo scutil --get HostName | tr '-' '.')
-#  echo "Setting computer name to $compname"
-#  scutil --set ComputerName "$compname"
-#  sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$compname"
-
 # Check for Homebrew Installation
 if ! which brew > /dev/null; then
      # Install Homebrew
@@ -36,8 +23,8 @@ echo 'Copying dotfiles'
 ./bootstrap.sh
 
 # os x defaults
-echo 'Setting OS X defaults'
-sh .osx
+echo 'Setting macOS defaults'
+sh .macos
 
 ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 
