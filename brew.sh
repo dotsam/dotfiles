@@ -13,6 +13,9 @@ brew tap homebrew/dupes
 brew tap homebrew/versions
 brew tap homebrew/homebrew-php
 
+# tap services - see: https://github.com/Homebrew/homebrew-services
+brew tap homebrew/services
+
 # Install GNU core utilities (those that come with OS X are outdated).
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 brew install coreutils
@@ -51,8 +54,8 @@ brew install sfnt2woff
 brew install sfnt2woff-zopfli
 brew install woff2
 
-# tap services - see: https://github.com/Homebrew/homebrew-services
-brew tap homebrew/services
+# gotta have a webserver
+brew install nginx
 
 # install current dev/vm version of php
 brew install php56
@@ -66,23 +69,30 @@ brew install sqlite
 
 # install php mods / composer
 brew install composer
+brew install drush
 brew install phpmd
 brew install php-code-sniffer
 brew install php-cs-fixer
+brew install wp-cli
+brew install xdebug-osx
+brew install shopify/shopify/themekit
 
 # install some http benchmarking tools
-brew install wrk
-brew install siege
-brew install vegeta
+#brew install wrk
+#brew install siege
+#brew install vegeta
 
 # install some network benchmarking/testing tools
 brew install iperf3
-brew install nuttcp
+#brew install nuttcp
 brew install mtr
-brew install owamp
-brew install scamper
-brew install whatmask
-brew install testssl
+#brew install owamp
+#brew install scamper
+#brew install whatmask
+#brew install testssl
+brew install curl
+brew install wget
+brew install mitmproxy
 
 # ssh stuff
 brew install ssh-copy-id
@@ -93,6 +103,7 @@ brew install ack
 brew install aria2
 brew install git
 brew install imagemagick --with-webp
+brew install pngcrush
 brew install lynx
 brew install p7zip
 brew install pigz
@@ -101,14 +112,13 @@ brew install rename
 brew install speedtest_cli
 brew install tree
 brew install webkit2png
-brew install zopfli
+#brew install zopfli
 brew install nmap
 brew install xz
 brew install tmux
-brew install ffmpeg --with-libvpx
+#brew install ffmpeg
 brew install android-platform-tools
 brew install grc
-brew install aria2
 brew install gifsicle
 brew install htop-osx
 brew install id3v2
@@ -117,8 +127,12 @@ brew install netcat
 brew install trash
 brew install minicom
 brew install unrar
-brew install ffmpeg
-brew install python
+brew install tmux
+#brew install python
+brew install bfg
+brew install gdrive
+brew install gnupg2
+brew install jhawthorn/fzy/fzy
 
 # Install Node Version Manager - because we are going to need to run multiple versions of node
 brew install nvm
