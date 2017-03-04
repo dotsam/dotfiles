@@ -13,6 +13,7 @@ tap 'jhawthorn/fzy'
 tap 'shopify/shopify'
 cask 'xquartz'
 cask 'java'
+brew 'mas'
 
 brew 'coreutils'
 brew 'moreutils'
@@ -163,3 +164,21 @@ cask 'scriptql'
 cask 'stringsfile'
 cask 'suspicious-package'
 cask 'webpquicklook'
+
+# Mac App Store
+mas 'Apple Configurator 2', id: 1037126344
+mas 'Blackmagic Disk Speed Test', id: 425264550
+mas 'Browser Fairy', id: 483014855
+mas 'DaisyDisk', id: 411643860
+mas 'Deliveries', id: 924726344
+mas 'Flume', id: 792425898
+mas 'Keynote', id: 409183694
+mas 'Microsoft Remote Desktop', id: 715768417
+mas 'Movist', id: 461788075
+mas 'Noizio', id: 928871589
+mas 'Numbers', id: 409203825
+mas 'Pages', id: 409201541
+mas 'Pixelmator', id: 407963104
+mas 'Speedtest', id: 1153157709
+mas 'Tweetbot', id: 557168941
+mas 'Twitter', id: 409789998
