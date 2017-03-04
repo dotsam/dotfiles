@@ -73,7 +73,7 @@ brew 'unar'
 brew 'webkit2png'
 
 brew 'nvm'
-#brew 'nvm-auto-switch'
+brew 'https://raw.githubusercontent.com/lalitkapoor/nvm-auto-switch/master/homebrew/nvm-auto-switch.rb'
 
 brew 'ruby-build'
 brew 'rbenv'
