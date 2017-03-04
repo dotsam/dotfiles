@@ -12,6 +12,7 @@ tap 'homebrew/versions'
 tap 'jhawthorn/fzy'
 tap 'shopify/shopify'
 cask 'xquartz'
+cask 'java'
 
 brew 'coreutils'
 brew 'moreutils'
@@ -72,7 +73,7 @@ brew 'unar'
 brew 'webkit2png'
 
 brew 'nvm'
-brew 'nvm-auto-switch'
+#brew 'nvm-auto-switch'
 
 brew 'ruby-build'
 brew 'rbenv'
