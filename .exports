@@ -11,13 +11,24 @@ export NODE_REPL_MODE='sloppy';
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8';
 
-# Increase Bash history size. Allow 32³ entries; the default is 500.
-export HISTSIZE='32768';
-export HISTFILESIZE="${HISTSIZE}";
-# Omit duplicates and commands that begin with a space from history.
-export HISTCONTROL='ignoreboth';
+# Automatically trim long paths in the prompt (requires Bash 4.x)
+export PROMPT_DIRTRIM=2
+
+# Huge history. Doesn't appear to slow things down, so why not?
+export HISTSIZE=500000
+export HISTFILESIZE=100000
+
+# Avoid duplicate entries
+export HISTCONTROL="erasedups:ignoreboth"
+
+# Don't record some commands
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
+
 # Add timestamps to history output
 export HISTTIMEFORMAT='%F %T ';
+
+# Record each line as it gets issued
+export PROMPT_COMMAND='history -a'
 
 # Prefer US English and use UTF-8.
 export LC_ALL=en_US.UTF-8

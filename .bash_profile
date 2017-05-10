@@ -15,19 +15,24 @@ for file in ~/.{extra,path,bash_prompt,exports,aliases,functions,extra,sd}; do
 done;
 unset file;
 
+# Update window size after every command
+shopt -s checkwinsize
+
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;
 
 # Append to the Bash history file, rather than overwriting it
 shopt -s histappend;
 
-# Autocorrect typos in path names when using `cd`
-shopt -s cdspell;
+# Save multi-line commands as one command
+shopt -s cmdhist
 
 # Enable some Bash 4 features when possible:
 # * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
 # * Recursive globbing, e.g. `echo **/*.txt`
-for option in autocd globstar; do
+# * Autocorrect typos in path names when using `cd`
+# * Correct spelling errors during tab-completion
+for option in autocd globstar cdspell dirspell; do
   shopt -s "$option" 2> /dev/null;
 done;
 
@@ -50,7 +55,7 @@ fi;
 
 # OS X specific
 if [[ "$OSTYPE" == darwin* ]]; then
-  export EDITOR='mate';
+  export EDITOR='mate -w';
 
   # Add tab completion for `defaults read|write NSGlobalDomain`
   # You could just use `-g` instead, but I like being explicit
