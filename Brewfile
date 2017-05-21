@@ -32,7 +32,6 @@ brew 'homebrew/dupes/screen'
 brew 'homebrew/dupes/openssh'
 
 brew 'ack'
-brew 'android-platform-tools'
 brew 'aria2'
 brew 'bfg'
 brew 'brightness'
@@ -99,6 +98,7 @@ brew 'shopify/shopify/themekit'
 ## Casks
 
 # Utilities
+cask 'android-platform-tools'
 cask 'spectacle'
 cask 'flux'
 cask 'harvest'
