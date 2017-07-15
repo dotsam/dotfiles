@@ -11,6 +11,9 @@ alias g="git"
 alias h="history"
 alias j="jobs"
 
+# Use colours in grep when possible
+alias grep="grep --color=auto"
+
 # if GNU ls is installed but prefixed, then use it
 if hash gls 2>/dev/null; then
   lsversion="gls"
