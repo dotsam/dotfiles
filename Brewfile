@@ -60,6 +60,7 @@ brew 'pigz'
 brew 'pngcrush'
 brew 'postgresql'
 brew 'pv'
+brew 'reattach-to-user-namespace'
 brew 'redis'
 brew 'rename'
 brew 'rtmpdump'
@@ -84,6 +85,10 @@ brew 'mariadb', restart_service: true
 brew 'homebrew/php/php56', restart_service: true
 brew 'homebrew/php/php56-mcrypt'
 brew 'homebrew/php/php56-xdebug'
+
+brew 'homebrew/php/php71', restart_service: true, conflicts_with: ["homebrew/php/php56"]
+brew 'homebrew/php/php71-mcrypt'
+brew 'homebrew/php/php71-xdebug'
 
 brew 'homebrew/php/composer'
 brew 'homebrew/php/drush'
