@@ -10,9 +10,6 @@ if which tmux >/dev/null 2>&1 && [[ "$SSH_CONNECTION" == "" ]]; then
     test -z "$TMUX" && (tmux attach || tmux new-session)
 fi
 
-# Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:$PATH";
-
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
