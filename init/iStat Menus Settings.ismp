@@ -3,17 +3,46 @@
 <plist version="1.0">
 <dict>
 	<key>build</key>
-	<real>705</real>
-	<key>license</key>
-	<string>5594-3655-2992-2168-8208</string>
+	<real>906</real>
 	<key>preferences</key>
 	<dict>
-		<key>Battery_MebubarModeCharged</key>
-		<string>2</string>
 		<key>Battery_MenubarCustomizeStates</key>
 		<integer>1</integer>
-		<key>Battery_MenubarHideBluetooth</key>
-		<integer>1</integer>
+		<key>Battery_MenubarModeAirpods</key>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>3</string>
+				<key>uuid</key>
+				<string>A8E54DFC-4C95-4009-BAEE-D41F9F9E4668</string>
+			</dict>
+		</array>
+		<key>Battery_MenubarModeBluetooth</key>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>3</string>
+				<key>uuid</key>
+				<string>C1C3EAF8-2C6B-4046-BC05-8B282A5F5431</string>
+			</dict>
+		</array>
+		<key>Battery_MenubarModeCharged</key>
+		<array/>
+		<key>Battery_MenubarModeCharging</key>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>2</string>
+				<key>uuid</key>
+				<string>E354A9FC-7C45-4CC3-9D2E-442E9EF45AD6</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>1</string>
+				<key>uuid</key>
+				<string>EDD424BF-B0CF-475E-B16C-544B6E209706</string>
+			</dict>
+		</array>
 		<key>CPU_AppFormat</key>
 		<integer>0</integer>
 		<key>CPU_CombineLogicalCores</key>
@@ -33,14 +62,111 @@
 		<key>CPU_MenubarGroupItems</key>
 		<integer>0</integer>
 		<key>CPU_MenubarMode</key>
-		<string>0</string>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>0</string>
+				<key>uuid</key>
+				<string>6573BB3D-5515-45B4-B101-C3DCFEE8BF48</string>
+			</dict>
+		</array>
+		<key>CPU_ProcessCount</key>
+		<integer>10</integer>
 		<key>CombinedMenubarDisplayMode</key>
-		<string>1</string>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>1</string>
+				<key>uuid</key>
+				<string>49FAF1CD-8121-4FC6-AB07-E56D4F76F72D</string>
+			</dict>
+		</array>
 		<key>Diagnostics_Enabled</key>
 		<integer>0</integer>
+		<key>Disks_DropdownShowAllActivity</key>
+		<integer>0</integer>
+		<key>Disks_MenubarGroupItems</key>
+		<integer>0</integer>
+		<key>Disks_MenubarItems</key>
+		<array>
+			<dict>
+				<key>boot</key>
+				<true/>
+				<key>key</key>
+				<string>1959346E-2A71-372F-B81C-33AAF3A656AA</string>
+				<key>name</key>
+				<string>Macintosh HD</string>
+			</dict>
+		</array>
+		<key>Disks_MenubarMode</key>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>2</string>
+				<key>uuid</key>
+				<string>2F7500D4-5629-49E4-866D-DB87A4CD9268</string>
+			</dict>
+		</array>
+		<key>Disks_MenubarUFBold</key>
+		<integer>0</integer>
+		<key>Disks_MenubarUFShowLabel</key>
+		<integer>0</integer>
+		<key>Disks_ProcessCount</key>
+		<integer>10</integer>
 		<key>FanControl_Enabled</key>
 		<false/>
+		<key>FanControl_Sets</key>
+		<array>
+			<dict>
+				<key>model</key>
+				<string>MacBookPro12,1</string>
+				<key>name</key>
+				<string>Medium</string>
+				<key>speeds</key>
+				<array>
+					<dict>
+						<key>fan</key>
+						<string>F0Ac</string>
+						<key>high</key>
+						<integer>6199</integer>
+						<key>low</key>
+						<integer>1299</integer>
+						<key>percentage</key>
+						<real>0.5</real>
+						<key>speed</key>
+						<integer>3749</integer>
+					</dict>
+				</array>
+				<key>uuid</key>
+				<string>E0D57A2B-BAC0-4A11-AFD4-000D962D3227</string>
+			</dict>
+			<dict>
+				<key>model</key>
+				<string>MacBookPro12,1</string>
+				<key>name</key>
+				<string>High</string>
+				<key>speeds</key>
+				<array>
+					<dict>
+						<key>fan</key>
+						<string>F0Ac</string>
+						<key>high</key>
+						<integer>6199</integer>
+						<key>low</key>
+						<integer>1299</integer>
+						<key>percentage</key>
+						<real>1</real>
+						<key>speed</key>
+						<integer>6199</integer>
+					</dict>
+				</array>
+				<key>uuid</key>
+				<string>017E959C-EE4F-4986-B6E5-C562AF6E0F5D</string>
+			</dict>
+		</array>
 		<key>Memory_DisplayFormat</key>
+		<integer>1</integer>
+		<key>Memory_IgnoreInactive</key>
 		<integer>1</integer>
 		<key>Memory_MenubarGraphActive</key>
 		<string>0.32 0.32 0.32 1.00</string>
@@ -53,25 +179,124 @@
 		<key>Memory_MenubarGraphWired</key>
 		<string>0.00 0.00 0.00 1.00</string>
 		<key>Memory_MenubarMode</key>
-		<string>6</string>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>6</string>
+				<key>uuid</key>
+				<string>87EE7248-1EFE-49F3-8EF1-C1F2423A62F9</string>
+			</dict>
+		</array>
+		<key>Memory_ProcessCount</key>
+		<integer>10</integer>
 		<key>MenubarSkinColor-Light</key>
 		<integer>7</integer>
 		<key>MenubarTheme</key>
 		<integer>0</integer>
+		<key>MigratedExtras_5.0</key>
+		<true/>
+		<key>MigratedExtras_5.1</key>
+		<true/>
+		<key>MigratedExtras_5.11</key>
+		<true/>
+		<key>Migrated_6.0</key>
+		<true/>
 		<key>Network_DecimalLevel</key>
 		<integer>1</integer>
 		<key>Network_GraphMode</key>
 		<integer>2</integer>
 		<key>Network_MenubarMode</key>
-		<string>3,0</string>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>3</string>
+				<key>uuid</key>
+				<string>F895EB8B-297E-4A41-B128-CBEBB09CF08D</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>0</string>
+				<key>uuid</key>
+				<string>69DA0810-4E95-41F6-A407-85F8E18EE6D4</string>
+			</dict>
+		</array>
 		<key>Network_TextBold</key>
 		<integer>0</integer>
+		<key>Notifications-Items</key>
+		<array>
+			<dict>
+				<key>enabled</key>
+				<true/>
+				<key>notification-type</key>
+				<string>1</string>
+				<key>rule-type</key>
+				<string>18</string>
+				<key>uuid</key>
+				<string>D742F523-C887-4271-8826-BE0AD58AA6A1</string>
+				<key>value</key>
+				<string>978332400</string>
+			</dict>
+			<dict>
+				<key>enabled</key>
+				<true/>
+				<key>notification-type</key>
+				<string>1</string>
+				<key>rule-type</key>
+				<string>17</string>
+				<key>uuid</key>
+				<string>A29867FF-EC51-4088-86E7-943F3A266B91</string>
+				<key>value</key>
+				<string>1.00</string>
+			</dict>
+			<dict>
+				<key>enabled</key>
+				<true/>
+				<key>notification-type</key>
+				<string>0</string>
+				<key>rule-type</key>
+				<string>14</string>
+				<key>uuid</key>
+				<string>99ED1072-300A-4041-81D8-16496DF71F22</string>
+				<key>value</key>
+				<string>10.00</string>
+			</dict>
+			<dict>
+				<key>enabled</key>
+				<true/>
+				<key>notification-type</key>
+				<string>1</string>
+				<key>rule-type</key>
+				<string>24</string>
+				<key>uuid</key>
+				<string>0C01E2AD-B891-4BBA-B358-25AD97F014EF</string>
+			</dict>
+			<dict>
+				<key>enabled</key>
+				<true/>
+				<key>notification-type</key>
+				<string>1</string>
+				<key>rule-type</key>
+				<string>20</string>
+				<key>uuid</key>
+				<string>7828EA09-DAAA-49F5-9117-84B73DFED270</string>
+				<key>value</key>
+				<string>10.00</string>
+			</dict>
+		</array>
 		<key>Sensors_MenubarMode</key>
-		<string>0</string>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>0</string>
+				<key>uuid</key>
+				<string>001080AC-5A19-4A2F-AA36-45CBCBAAFD15</string>
+			</dict>
+		</array>
 		<key>Sensors_MenubarTextSize</key>
 		<integer>12</integer>
 		<key>StatusItems-Order</key>
 		<array>
+			<integer>3</integer>
 			<integer>1</integer>
 			<integer>4</integer>
 			<integer>5</integer>
@@ -86,6 +311,8 @@
 		<integer>1</integer>
 		<key>Time_Cities</key>
 		<array>
+			<string>-6</string>
+			<string>-7</string>
 			<real>6174041</real>
 			<real>5913490</real>
 			<real>5128581</real>
@@ -108,12 +335,23 @@
 		</array>
 		<key>Time_MenubarFormat</key>
 		<array>
-			<string>___ICON__TRANSPARENT___</string>
-			<string>EE</string>
-			<string>' '</string>
-			<string>HH</string>
-			<string>':'</string>
-			<string>mm</string>
+			<dict>
+				<key>format</key>
+				<array>
+					<array>
+						<string>___ICON__MOON___</string>
+						<string>___ICON__BLACK___</string>
+						<string>EE</string>
+						<string>' '</string>
+						<string>HH</string>
+						<string>':'</string>
+						<string>mm</string>
+					</array>
+					<array/>
+				</array>
+				<key>lines</key>
+				<integer>1</integer>
+			</dict>
 		</array>
 		<key>Time_WeekNumberFormat</key>
 		<integer>0</integer>
@@ -121,6 +359,6 @@
 		<integer>2</integer>
 	</dict>
 	<key>version</key>
-	<real>5.309999942779541</real>
+	<real>6</real>
 </dict>
 </plist>
