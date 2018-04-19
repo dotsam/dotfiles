@@ -53,6 +53,9 @@ alias sudo='sudo '
 # Get week number
 alias week='date +%V'
 
+# Get unix epock time
+alias epoch='date +%s'
+
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
