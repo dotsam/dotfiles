@@ -4,12 +4,6 @@ case $- in
       *) return;;
 esac
 
-# TMUX
-if which tmux >/dev/null 2>&1 && [[ "$SSH_CONNECTION" == "" ]]; then
-    #if not inside a tmux session, and not connected via ssh, and if no session is started, start a new session
-    test -z "$TMUX" && (tmux attach || tmux new-session)
-fi
-
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
@@ -92,14 +86,18 @@ fi
 if which brew &> /dev/null && [ -f "$(brew --prefix nvm)/nvm.sh" ]; then
   export NVM_DIR="$HOME/.nvm"
   . "$(brew --prefix nvm)/nvm.sh"
-  # use nvm-auto-switcher if installed
-  if [ -f "$(brew --prefix nvm-auto-switch)/nvm-auto-switch.sh" ]; then
-    . "$(brew --prefix nvm-auto-switch)/nvm-auto-switch.sh"
-  fi
 fi
+
+[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
 
 # Init rbenv if it exists
 if which rbenv &> /dev/null; then eval "$(rbenv init -)"; fi
 
 # hcl autocomplete aliases if they exist
 [ -e "$HOME/.hcl/aliases" ] && complete -W "`cat ~/.hcl/aliases`" hcl
+
+# TMUX
+if which tmux >/dev/null 2>&1 && [[ "$SSH_CONNECTION" == "" ]]; then
+    #if not inside a tmux session, and not connected via ssh, and if no session is started, start a new session
+    test -z "$TMUX" && (tmux attach || tmux new-session)
+fi
