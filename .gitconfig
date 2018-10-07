@@ -141,6 +141,11 @@
 	# Use `hexdump` to diff binary files
 	textconv = hexdump -v -C
 
+[diff "minjs"]
+  textconv = js-beautify
+[diff "mincss"]
+  textconv = js-beautify --css
+
 [help]
 
 	# Automatically correct and execute mistyped commands
@@ -181,3 +186,12 @@
 [url "git://gist.github.com/"]
 
 	insteadOf = "gist:"
+
+[credential]
+	helper = osxkeychain
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
