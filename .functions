@@ -1,20 +1,4 @@
-# Simple calculator
-function calc() {
-  local result="";
-  result="$(printf "scale=10;$*\n" | bc --mathlib | tr -d '\\\n')";
-  #                       └─ default (when `--mathlib` is used) is 20
-  #
-  if [[ "$result" == *.* ]]; then
-    # improve the output for decimal numbers
-    printf "$result" |
-    sed -e 's/^\./0./'        `# add "0" for cases like ".5"` \
-        -e 's/^-\./-0./'      `# add "0" for cases like "-.5"`\
-        -e 's/0*$//;s/\.$//';  # remove trailing zeros
-  else
-    printf "$result";
-  fi;
-  printf "\n";
-}
+#!/usr/bin/env bash
 
 # Create a new directory and enter it
 function mkd() {
@@ -125,16 +109,6 @@ function gz() {
   local ratio=$(echo "$gzipsize * 100 / $origsize" | bc -l);
   printf "orig: %d bytes\n" "$origsize";
   printf "gzip: %d bytes (%2.2f%%)\n" "$gzipsize" "$ratio";
-}
-
-# Syntax-highlight JSON strings or files
-# Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
-function json() {
-  if [ -t 0 ]; then # argument
-    python -mjson.tool <<< "$*" | pygmentize -l javascript;
-  else # pipe
-    python -mjson.tool | pygmentize -l javascript;
-  fi;
 }
 
 # Run `dig` and display the most useful info
@@ -259,18 +233,18 @@ gifify() {
 
 # Search history
 grephist() {
-    grep --color=always "$*" "$HISTFILE" |       less -RX
+    grep --color=always "$*" "$HISTFILE" | less -RX
 }
 
 # Search for text within the current directory
 grephere() {
-    grep -ir --color=always "$*" . | less -RX
+    grep -ir --color=always "$*" --exclude-dir=".git" --exclude-dir="node_modules" . | less -RX
 }
 
 # grepfind: to grep through files found by find, e.g. grepf pattern '*.c'
 # note that 'grep -r pattern dir_name' is an alternative if want all files 
 grepfind () {
-    find . -type f -name "$2" -print0 | xargs -0 grep "$1" ;
+    find . -type f -name "$2" -not \( -path */.git -prune \) -not \( -path */node_modules -prune \) -print0 | xargs -0 grep --color=always "$1" | less -RX
 }
 
 # Colourize manpages
@@ -285,6 +259,27 @@ man() {
       man "$@"
 }
 
+# Normalize `open` across Linux, macOS, and Windows.
+# This is needed to make the `o` function (see below) cross-platform.
+if [ ! $(uname -s) = 'Darwin' ]; then
+  if grep -q Microsoft /proc/version; then
+    # Ubuntu on Windows using the Linux subsystem
+    alias open='explorer.exe';
+  else
+    alias open='xdg-open';
+  fi
+fi
+
+# `o` with no arguments opens the current directory, otherwise opens the given
+# location
+function o() {
+  if [ $# -eq 0 ]; then
+    open .;
+  else
+    open "$@";
+  fi;
+}
+
 # OS X specific
 if [[ "$OSTYPE" == darwin* ]]; then
 
@@ -293,16 +288,6 @@ if [[ "$OSTYPE" == darwin* ]]; then
       echo "Checking to see who is using the iSight camera… 📷"
       usedby=$(lsof | grep -w "AppleCamera\|USBVDC\|iSight" | awk '{printf $2"\n"}' | xargs ps)
       echo -e "Recent camera uses:\n$usedby"
-  }
-
-  # `o` with no arguments opens the current directory, otherwise opens the given
-  # location
-  function o() {
-    if [ $# -eq 0 ]; then
-      open .;
-    else
-      open "$@";
-    fi;
   }
 
   # `m` with no arguments opens the current directory in TextMate, otherwise
@@ -317,17 +302,5 @@ if [[ "$OSTYPE" == darwin* ]]; then
 
   # mdfindname: to search for a file by name using Spotlight's metadata
   function mdfindname { mdfind "kMDItemDisplayName == '$@'wc"; }
-
-else
-
-  # `o` with no arguments opens the current directory, otherwise opens the given
-  # location
-  function o() {
-    if [ $# -eq 0 ]; then
-      xdg-open .;
-    else
-      xdg-open "$@";
-    fi;
-  }
 
 fi
