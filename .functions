@@ -242,7 +242,7 @@ grephere() {
 }
 
 # grepfind: to grep through files found by find, e.g. grepf pattern '*.c'
-# note that 'grep -r pattern dir_name' is an alternative if want all files 
+# note that 'grep -r pattern dir_name' is an alternative if want all files
 grepfind () {
     find . -type f -name "$2" -not \( -path */.git -prune \) -not \( -path */node_modules -prune \) -print0 | xargs -0 grep --color=always "$1" | less -RX
 }
@@ -294,9 +294,9 @@ if [[ "$OSTYPE" == darwin* ]]; then
   # opens the given location
   function m() {
     if [ $# -eq 0 ]; then
-      mate .;
+      $EDITOR .;
     else
-      mate "$@";
+      $EDITOR "$@";
     fi;
   }
 
