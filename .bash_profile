@@ -13,7 +13,7 @@ done;
 unset file;
 
 # Update window size after every command
-shopt -s checkwinsize
+shopt -s checkwinsize;
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;
@@ -22,7 +22,14 @@ shopt -s nocaseglob;
 shopt -s histappend;
 
 # Save multi-line commands as one command
-shopt -s cmdhist
+shopt -s cmdhist;
+
+# When the command contains an invalid history operation (for instance when
+# using an unescaped "!" (I get that a lot in quick e-mails and commit
+# messages) or a failed substitution (e.g. "^foo^bar" when there was no "foo"
+# in the previous command line), do not throw away the command line, but let me
+# correct it.
+shopt -s histreedit;
 
 # Enable some Bash 4 features when possible:
 # * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
@@ -53,17 +60,6 @@ fi;
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
-
-# GPG agent/ssh agent Setup
-export GPG_TTY="$(tty)"
-if [[ -n "$SSH_CONNECTION" ]] ;then
-  export PINENTRY_USER_DATA="USE_CURSES=1"
-fi
-
-#if which gpgconf >/dev/null 2>&1 && [[ "$SSH_CONNECTION" == "" ]]; then
-#  gpgconf --launch gpg-agent
-#  export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-#fi
 
 # OS X specific
 if [[ "$OSTYPE" == darwin* ]]; then

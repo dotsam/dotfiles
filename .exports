@@ -36,7 +36,7 @@ export HISTTIMEFORMAT='%F %T ';
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }history -a;history -n"
 
 # Prefer US English and use UTF-8.
-export LANG="en_US"
+export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
@@ -44,10 +44,16 @@ export LC_CTYPE="en_US.UTF-8"
 export LESS_TERMCAP_md="${yellow}";
 
 # Don’t clear the screen after quitting a manual page.
-export MANPAGER='less -RF';
+export MANPAGER='less -RqX';
 
 # Set Colour LS Output
 export CLICOLOR=yes
 
 # Make the "sudo" prompt more useful, without requiring access to "visudo".
 export SUDO_PROMPT='[sudo] password for %u on %h: ';
+
+# GPG agent/ssh agent Setup
+export GPG_TTY="$(tty)"
+if [[ -n "$SSH_CONNECTION" ]] ;then
+  export PINENTRY_USER_DATA="USE_CURSES=1"
+fi
