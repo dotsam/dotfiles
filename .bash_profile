@@ -33,9 +33,13 @@ for option in autocd globstar cdspell dirspell; do
   shopt -s "$option" 2> /dev/null;
 done;
 
+if which brew &> /dev/null; then
+	BREWPREFIX=$(brew --prefix)
+fi;
+
 # Add tab completion for many Bash commands
-if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
-  source "$(brew --prefix)/share/bash-completion/bash_completion";
+if [ $BREWPREFIX ] && [ -f "$BREWPREFIX/share/bash-completion/bash_completion" ]; then
+  source "$BREWPREFIX/share/bash-completion/bash_completion";
 elif [ -f /etc/bash_completion ]; then
   source /etc/bash_completion;
 elif [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -43,7 +47,7 @@ elif [ -f /usr/share/bash-completion/bash_completion ]; then
 fi;
 
 # Enable tab completion for `g` by marking it as an alias for `git`
-if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+if type _git &> /dev/null && [ -f "$BREWPREFIX/etc/bash_completion.d/git-completion.bash" ]; then
   complete -o default -o nospace -F _git g;
 fi;
 
@@ -56,10 +60,10 @@ if [[ -n "$SSH_CONNECTION" ]] ;then
   export PINENTRY_USER_DATA="USE_CURSES=1"
 fi
 
-if which gpgconf >/dev/null 2>&1 && [[ "$SSH_CONNECTION" == "" ]]; then
-  gpgconf --launch gpg-agent
-  export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-fi
+#if which gpgconf >/dev/null 2>&1 && [[ "$SSH_CONNECTION" == "" ]]; then
+#  gpgconf --launch gpg-agent
+#  export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+#fi
 
 # OS X specific
 if [[ "$OSTYPE" == darwin* ]]; then
@@ -85,9 +89,9 @@ else
 fi
 
 #nvm because node is just as fucked as ruby
-if which brew &> /dev/null && [ -f "$(brew --prefix nvm)/nvm.sh" ]; then
+if [ $BREWPREFIX ] && [ -f "$BREWPREFIX/opt/nvm/nvm.sh" ]; then
   export NVM_DIR="$HOME/.nvm"
-  . "$(brew --prefix nvm)/nvm.sh"
+  . "$BREWPREFIX/opt/nvm/nvm.sh"
 fi
 
 [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
