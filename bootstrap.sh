@@ -10,12 +10,13 @@ function doIt() {
 	rsync --exclude ".git/" \
 		--exclude ".gitmodules" \
 		--exclude ".DS_Store" \
-		--exclude ".osx" \
+		--exclude ".macos" \
 		--exclude "bootstrap.sh" \
 		--exclude "install.sh" \
 		--exclude "README.md" \
 		--exclude "LICENSE-MIT.txt" \
 		--exclude "sd/" \
+		--exclude "init/" \
 		-avh --no-perms . ~;
 	source ~/.bash_profile;
 }
