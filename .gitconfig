@@ -18,6 +18,9 @@
   # Pull in remote changes for the current repository and all its submodules
   p = !"git pull; git submodule foreach git pull origin master"
 
+  # Force unpush. Never use this.
+  unpush = push -f origin HEAD^:master
+
   # Clone a repository including all submodules
   c = clone --recursive
 
