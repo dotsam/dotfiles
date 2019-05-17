@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Use Git’s colored diff when available
-if [ hash git &>/dev/null ]; then
+if hash git &>/dev/null; then
   function diff() {
     git diff --no-index --color-words "$@";
   }
@@ -117,7 +117,10 @@ function getcertnames() {
     return 1;
   fi;
 
-  local domain="${1}";
+  local domain=$(echo "$1" | awk -F/ '{print $3}') # get domain from URL
+  if [ -z $domain ] ; then
+    domain=$1
+  fi
   echo "Testing ${domain}…";
   echo ""; # newline
 
