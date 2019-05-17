@@ -93,7 +93,8 @@ function digga() {
   if [ -z $domain ] ; then
     domain=$1
   fi
-  dig +nocmd "$domain" any +multiline +noall +answer;
+  echo "Getting common DNS records for: $domain …"
+  dig +nocmd +multiline +noall +answer "$domain" ns "$domain" a "$domain" mx "$domain" txt;
 }
 
 # whois a domain or a URL
@@ -104,10 +105,8 @@ function whois() {
   fi
   echo "Getting whois record for: $domain …"
 
-  # avoid recursion
-          # this is the best whois server
-                          # strip extra fluff
-  /usr/bin/whois -h whois.internic.net $domain | sed '/NOTICE:/q'
+  # Strip whois server notices, and pipe to less
+  /usr/bin/whois | sed '/NOTICE:/q' | less -qX
 }
 
 # Show all the names (CNs and SANs) listed in the SSL certificate
