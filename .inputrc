@@ -1,3 +1,6 @@
+# If there are multiple matches for completion, make TAB cycle through them.
+TAB: menu-complete
+
 # Make Tab autocomplete regardless of filename case
 set completion-ignore-case on
 
@@ -14,8 +17,6 @@ set mark-symlinked-directories on
 # commands (i.e. more intelligent Up/Down behavior)
 "\e[A": history-search-backward
 "\e[B": history-search-forward
-"\e[C": forward-char
-"\e[D": backward-char
 
 # Do not autocomplete hidden files unless the pattern explicitly begins with a dot
 set match-hidden-files off
@@ -25,6 +26,9 @@ set page-completions off
 
 # If there are more than 200 possible completions for a word, ask to show them all
 set completion-query-items 200
+
+# partial completion on the first Tab press, and only start cycling full results on the second Tab press
+set menu-complete-display-prefix on
 
 # Show extra file information when completing, like `ls -F` does
 set visible-stats on
