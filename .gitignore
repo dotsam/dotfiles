@@ -1,17 +1,60 @@
-# Compiled Python files
+# Useful `.gitignore` templates:
+# https://github.com/github/gitignore
+
+# ----------------------------------------------------------------------
+# | Linux                                                              |
+# ----------------------------------------------------------------------
+
+*~
+
+
+# ----------------------------------------------------------------------
+# | Miscellaneous                                                      |
+# ----------------------------------------------------------------------
+
+# Node.js & npm.
+
+node_modules
+npm-debug.log
+yarn-debug.log
+pnpm-debug.log
+
+# Compiled python
 *.pyc
+*.pyo
 
-# Folder view configuration files
-.DS_Store
-Desktop.ini
+# ----------------------------------------------------------------------
+# | macOS                                                              |
+# ----------------------------------------------------------------------
 
-# Thumbnail cache files
 ._*
-Thumbs.db
-
-# Files that might appear on external disks
+.AppleDouble
+.DS_Store
+.localized
+.LSOverride
 .Spotlight-V100
 .Trashes
+Icon
 
-# Ignore sd
+
+# ----------------------------------------------------------------------
+# | Vim                                                                |
+# ----------------------------------------------------------------------
+
+%*
+*.sw[a-z]
+*.un~
+.netrwhist
+Session.vim
+
+
+# ----------------------------------------------------------------------
+# | Windows                                                            |
+# ----------------------------------------------------------------------
+
+Desktop.ini
+ehthumbs.db
+Thumbs.db
+
+# This dotfiles repo - Ignore sd
 .sd

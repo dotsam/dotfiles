@@ -149,6 +149,13 @@
 [diff "mincss"]
   textconv = js-beautify --css
 
+[filter "lfs"]
+
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+
 [help]
 
   # Automatically correct and execute mistyped commands
@@ -161,10 +168,6 @@
 
 [push]
 
-  # Use the Git 1.x.x default to avoid errors on machines with old Git
-  # installations. To use `simple` instead, add this to your `~/.extra` file:
-  # `git config --global push.default simple`. See http://git.io/mMah-w.
-  default = simple
   # Make `git push` push relevant annotated tags when pushing branches out.
   followTags = true
 
@@ -190,11 +193,13 @@
 
   insteadOf = "gist:"
 
-[credential]
-  helper = osxkeychain
+[include]
 
-[filter "lfs"]
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  required = true
+  # Load local configs.
+  # https://git-scm.com/docs/git-config#_includes
+  #
+  # [!] The following needs to remain at the end of this file in
+  #     order to allow any of the above configs to be overwritten
+  #     by the local ones
+
+  path = ~/.gitconfig.local
