@@ -106,7 +106,7 @@ function whois() {
   echo "Getting whois record for: $domain …"
 
   # Strip whois server notices, and pipe to less
-  /usr/bin/whois | sed '/NOTICE:/q' | less -qX
+  /usr/bin/whois "$domain" | sed '/NOTICE:/q' | less -qX
 }
 
 # Show all the names (CNs and SANs) listed in the SSL certificate
