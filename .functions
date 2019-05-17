@@ -94,7 +94,7 @@ function digga() {
     domain=$1
   fi
   echo "Getting common DNS records for: $domain …"
-  dig +nocmd +multiline +noall +answer "$domain" ns "$domain" a "$domain" mx "$domain" txt;
+  dig +nocmd +multiline +noall +answer "$domain" ns "$domain" a "$domain" aaaa "$domain" mx "$domain" txt;
 }
 
 # whois a domain or a URL
