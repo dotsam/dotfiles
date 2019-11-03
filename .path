@@ -1,5 +1,6 @@
+# Decending order
 export PATH="/usr/bin:/usr/sbin:$PATH"
-export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 #export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
