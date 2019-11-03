@@ -1,14 +1,7 @@
-tap 'caskroom/cask'
-tap 'caskroom/drivers'
-tap 'caskroom/eid'
-tap 'caskroom/fonts'
-tap 'caskroom/versions'
+tap 'homebrew/cask-versions'
 tap 'homebrew/bundle'
-tap 'homebrew/core'
-tap 'homebrew/dupes'
-tap 'homebrew/php'
 tap 'homebrew/services'
-tap 'homebrew/versions'
+#tap 'homebrew/versions'
 tap 'jhawthorn/fzy'
 tap 'shopify/shopify'
 cask 'xquartz'
@@ -20,40 +13,37 @@ brew 'moreutils'
 brew 'findutils'
 
 brew 'bash'
-brew 'homebrew/versions/bash-completion2'
+brew 'bash-completion@2'
 
-brew 'vim', args: ['with-override-system-vi']
-brew 'gnu-sed', args: ['with-default-names']
-brew 'wget', args: ['with-iri']
-brew 'curl', args: ['with-libidn', 'with-libmetalink', 'with-libssh2', 'with-nghttp2', 'with-rtmpdump']
+brew 'vim'
+brew 'gnu-sed'
+brew 'wget'
+brew 'curl'
 
-brew 'homebrew/dupes/grep'
-brew 'homebrew/dupes/screen'
-brew 'homebrew/dupes/openssh'
+brew 'grep'
+brew 'screen'
+brew 'openssh'
 
 brew 'ack'
 brew 'aria2'
-brew 'bfg'
 brew 'brightness'
-brew 'dark-mode'
 brew 'git'
 brew 'ffmpeg'
 brew 'gdrive'
-brew 'gifsicle'
-brew 'gnupg2'
-brew 'openssl'
+#brew 'gnupg2'
+#brew 'openssl'
 brew 'sqlite'
 brew 'xz'
-brew 'htop-osx'
-brew 'id3v2'
-brew 'imagemagick@6'
+brew 'htop'
+#brew 'id3v2'
+brew 'imagemagick'
 brew 'iperf3'
 brew 'lynx'
 brew 'minicom'
 brew 'mitmproxy'
 brew 'mtr'
 brew 'netcat'
-brew 'ninja'
+#brew 'ninja'
 brew 'nmap'
 brew 'p7zip'
 brew 'pigz'
@@ -66,36 +56,33 @@ brew 'rename'
 brew 'rtmpdump'
 brew 'speedtest_cli'
 brew 'ssh-copy-id'
-brew 'stormssh'
+#brew 'stormssh'
 brew 'tmux'
-brew 'trash'
+#brew 'trash'
 brew 'tree'
 brew 'unar'
-brew 'webkit2png'
+#brew 'webkit2png'
 
-brew 'nvm'
-brew 'https://raw.githubusercontent.com/lalitkapoor/nvm-auto-switch/master/homebrew/nvm-auto-switch.rb'
+#brew 'nvm'
+#brew 'https://raw.githubusercontent.com/lalitkapoor/nvm-auto-switch/master/homebrew/nvm-auto-switch.rb'
 
 brew 'ruby-build'
 brew 'rbenv'
 
-brew 'nginx', restart_service: true
-brew 'mariadb', restart_service: true
+brew 'nginx'
+brew 'httpd', restart_service: true
+brew 'mysql@5.7'
 
-brew 'homebrew/php/php56', restart_service: true
-brew 'homebrew/php/php56-mcrypt'
-brew 'homebrew/php/php56-xdebug'
+#brew 'php@5.6'
+brew 'php@7.2'
+brew 'php'
 
-brew 'homebrew/php/php71', restart_service: true, conflicts_with: ["homebrew/php/php56"]
-brew 'homebrew/php/php71-mcrypt'
-brew 'homebrew/php/php71-xdebug'
-
-brew 'homebrew/php/composer'
-brew 'homebrew/php/drush'
-brew 'homebrew/php/php-cs-fixer'
-brew 'homebrew/php/phpmyadmin'
-brew 'homebrew/php/wp-cli'
-brew 'homebrew/php/xdebug-osx'
+brew 'composer'
+brew 'php-cs-fixer'
+brew 'phpmyadmin'
+brew 'wp-cli'
+brew 'wp-cli-completion'
+#brew 'homebrew/php/xdebug-osx'
 
 brew 'jhawthorn/fzy/fzy'
 brew 'shopify/shopify/themekit'
@@ -110,50 +97,52 @@ cask 'harvest'
 cask '1password'
 cask 'istat-menus'
 cask 'witch'
-#cask 'gpgtools'
-cask 'keepingyouawake'
+cask 'gpg-suite-nightly'
+#cask 'keepingyouawake'
 cask 'keybase'
 cask 'sequel-pro'
-cask 'nagstamon'
+#cask 'nagstamon'
 
 # Multimedia?
-cask 'adobe-creative-cloud'
+#cask 'adobe-creative-cloud'
 cask 'handbrake'
 cask 'vlc'
+cask 'movist-pro'
 #cask 'airfoil'
 
 # Editors
-cask 'atom'
+#cask 'atom'
 cask 'coda'
-cask 'sublime-text'
+#cask 'sublime-text'
 cask 'textmate'
+cask 'visual-studio-code'
 
 # Browsers
 cask 'firefox'
 cask 'google-chrome'
 
 # Other Apps
-cask 'bonjour-browser'
+#cask 'bonjour-browser'
 cask 'coolterm'
-cask 'linein'
-cask 'google-drive'
+#cask 'linein'
+#cask 'google-drive'
 cask 'macpar-deluxe'
-cask 'mpeg-streamclip'
+#cask 'mpeg-streamclip'
 cask 'gitup'
 cask 'rescuetime'
 cask 'nvalt'
-cask 'pacifist'
-cask 'phonebrowse'
-cask 'sketch'
-cask 'skype'
+#cask 'pacifist'
+#cask 'phonebrowse'
+#cask 'sketch'
+#cask 'skype'
 cask 'slack'
-cask 'teamviewer'
+#cask 'teamviewer'
 cask 'the-unarchiver'
 cask 'transmission'
 cask 'transmit'
 
 # Quicklook Plugins
-cask 'betterzipql'
+#cask 'betterzipql'
 cask 'provisionql'
 cask 'qlcolorcode'
 cask 'qlimagesize'
@@ -173,17 +162,17 @@ cask 'webpquicklook'
 # Mac App Store
 mas 'Apple Configurator 2', id: 1037126344
 mas 'Blackmagic Disk Speed Test', id: 425264550
-mas 'Browser Fairy', id: 483014855
+#mas 'Browser Fairy', id: 483014855
 mas 'DaisyDisk', id: 411643860
 mas 'Deliveries', id: 924726344
-mas 'Flume', id: 792425898
+#mas 'Flume', id: 792425898
 mas 'Keynote', id: 409183694
-mas 'Microsoft Remote Desktop', id: 715768417
-mas 'Movist', id: 461788075
+#mas 'Microsoft Remote Desktop', id: 715768417
+#mas 'Movist', id: 461788075
 mas 'Noizio', id: 928871589
 mas 'Numbers', id: 409203825
 mas 'Pages', id: 409201541
 mas 'Pixelmator', id: 407963104
 mas 'Speedtest', id: 1153157709
-mas 'Tweetbot', id: 557168941
-mas 'Twitter', id: 409789998
+#mas 'Tweetbot', id: 557168941
+#mas 'Twitter', id: 409789998
