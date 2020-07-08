@@ -19,6 +19,9 @@ export PROMPT_DIRTRIM=4
 # disable macOS terminal history sessions
 export SHELL_SESSION_HISTORY=0
 
+# Hide the “default interactive shell is now zsh” warning on macOS.
+export BASH_SILENCE_DEPRECATION_WARNING=1;
+
 # Huge history. Doesn't appear to slow things down, so why not?
 export HISTSIZE=500000
 export HISTFILESIZE=100000

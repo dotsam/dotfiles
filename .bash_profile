@@ -96,7 +96,7 @@ if which rbenv &> /dev/null; then eval "$(rbenv init -)"; fi
 [[ -s "$HOME/.acme.sh/acme.sh.env" ]] && source "$HOME/.acme.sh/acme.sh.env"
 
 # TMUX
-if which tmux >/dev/null 2>&1 && [[ "$SSH_CONNECTION" == "" ]]; then
+if which tmux >/dev/null 2>&1; then
     #if not inside a tmux session, and not connected via ssh, and if no session is started, start a new session
     test -z "$TMUX" && (tmux attach || tmux new-session)
 fi
