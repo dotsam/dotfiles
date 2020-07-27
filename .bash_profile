@@ -51,6 +51,8 @@ if [ $BREWPREFIX ] && [ -f "$BREWPREFIX/etc/profile.d/bash_completion.sh" ]; the
   source "$BREWPREFIX/etc/profile.d/bash_completion.sh";
 elif [ -f /etc/bash_completion ]; then
   source /etc/bash_completion;
+elif [ -f /usr/share/bash-completion/bash_completion ]; then
+  source /usr/share/bash-completion/bash_completion;
 fi;
 
 # Enable tab completion for `g` by marking it as an alias for `git`
