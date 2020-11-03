@@ -4,6 +4,13 @@ case $- in
       *) return;;
 esac
 
+# Load tmux early so we don't set up a shell we're not going to really use
+if which tmux >/dev/null 2>&1; then
+  if [[ -z "$TMUX" ]]; then
+    tmux has && tmux attach || tmux new-session
+  fi
+fi
+
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
@@ -51,8 +58,6 @@ if [ $BREWPREFIX ] && [ -f "$BREWPREFIX/etc/profile.d/bash_completion.sh" ]; the
   source "$BREWPREFIX/etc/profile.d/bash_completion.sh";
 elif [ -f /etc/bash_completion ]; then
   source /etc/bash_completion;
-elif [ -f /usr/share/bash-completion/bash_completion ]; then
-  source /usr/share/bash-completion/bash_completion;
 fi;
 
 # Enable tab completion for `g` by marking it as an alias for `git`
@@ -80,6 +85,9 @@ if [[ "$OSTYPE" == darwin* ]]; then
   complete -d cd rmdir
 fi
 
+# Init rbenv if it exists
+if which rbenv &> /dev/null; then eval "$(rbenv init -)"; fi
+
 #nvm because node is just as fucked as ruby
 if [ $BREWPREFIX ] && [ -f "$BREWPREFIX/opt/nvm/nvm.sh" ]; then
   export NVM_DIR="$HOME/.nvm"
@@ -88,17 +96,8 @@ fi
 
 [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
 
-# Init rbenv if it exists
-if which rbenv &> /dev/null; then eval "$(rbenv init -)"; fi
-
 # hcl autocomplete aliases if they exist
 [ -e "$HOME/.hcl/aliases" ] && complete -W "`cat ~/.hcl/aliases`" hcl
 
 # load acme.sh
 [[ -s "$HOME/.acme.sh/acme.sh.env" ]] && source "$HOME/.acme.sh/acme.sh.env"
-
-# TMUX
-if which tmux >/dev/null 2>&1; then
-    #if not inside a tmux session, and not connected via ssh, and if no session is started, start a new session
-    test -z "$TMUX" && (tmux attach || tmux new-session)
-fi
