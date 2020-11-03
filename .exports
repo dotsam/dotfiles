@@ -36,7 +36,7 @@ export HISTIGNORE="&:[bf]g:c:clear:history:exit:q:pwd:* --help"
 export HISTTIMEFORMAT='%F %T ';
 
 # Record each line as it gets issued
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }history -a;history -n"
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}history -a;history -n"
 
 # Prefer US English and use UTF-8.
 export LANG="en_US.UTF-8"
@@ -45,7 +45,6 @@ export LC_CTYPE="en_US.UTF-8"
 
 # Highlight section titles in manual pages.
 # export LESS_TERMCAP_md="${yellow}";
-
 export LESS_TERMCAP_md="${cyan}";
 export LESS_TERMCAP_me="${reset}";
 export LESS_TERMCAP_se="${reset}";
