@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require "hcl"
+
+hcl = HCl::App.new
+
+result = 'NO TIMER RUNNING'
+total_hours = 0.0
+
+HCl::DayEntry.daily(hcl.http).each do |day|
+  if day.running?
+    result = "#{day.formatted_hours} - #{day.task} (#{day.project})"
+  end
+  total_hours = total_hours + day.hours.to_f
+end
+
+result << " | T: #{hcl.as_hours total_hours}"
+
+puts result
