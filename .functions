@@ -254,4 +254,27 @@ if [[ "$OSTYPE" == darwin* ]]; then
   # mdfindname: to search for a file by name using Spotlight's metadata
   function mdfindname { mdfind "kMDItemDisplayName == '$@'wc"; }
 
+  function pman() {
+    this_man_page="$(/usr/bin/man -w "$@" 2> /dev/null)"
+
+    if [ -f "${this_man_page}" ]; then
+      mandoc -T pdf "${this_man_page}" | open -fa Preview
+    else
+      /usr/bin/man "$@" # If the man page didn't exist, run the actual "man" command with the passed arguments to show any relevant output or error.
+    fi
+  }
+
+  function xman() {
+    this_man_page="$(/usr/bin/man -w "$@" 2> /dev/null)"
+
+    if [ -f "${this_man_page}" ]; then
+      if [[ -z $2 ]]; then
+        open x-man-page://"$1"
+      else
+        open x-man-page://"$1"/"$2"
+      fi
+    else
+      /usr/bin/man "$@" # If the man page didn't exist, run the actual "man" command with the passed arguments to show any relevant output or error.
+    fi
+  }
 fi
