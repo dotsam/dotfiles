@@ -73,6 +73,23 @@ if type __git_complete &> /dev/null; then
   __git_complete g __git_main;
 fi;
 
+# Nano syntax highlighting
+if [ ! -L $HOME/.config/nano/syntax ] || [ ! -d $HOME/.config/nano/syntax ]; then
+  if [ $HOMEBREW_PREFIX ] && [ -L "$HOMEBREW_PREFIX/share/nanorc" ]; then
+    mkdir -p $HOME/.config/nano
+    ln -s $HOMEBREW_PREFIX/share/nanorc $HOME/.config/nano/syntax
+  elif [ $HOMEBREW_PREFIX ] && [ -L "$HOMEBREW_PREFIX/share/nano" ]; then
+    mkdir -p $HOME/.config/nano
+    ln -s $HOMEBREW_PREFIX/share/nano $HOME/.config/nano/syntax
+  elif [ -d "/usr/share/nano" ]; then
+    mkdir -p $HOME/.config/nano
+    ln -s /usr/share/nano $HOME/.config/nano/syntax
+  else
+    mkdir -p $HOME/.config/nano/syntax
+    touch $HOME/.config/nano/syntax/empty.nanorc
+  fi
+fi
+
 # OS X specific
 if [[ "$OSTYPE" == darwin* ]]; then
   export EDITOR='code';

@@ -1,9 +1,10 @@
 set tabsize 2
 set autoindent
-set const
+set constantshow
 set historylog
-set morespace
 set mouse
 set nonewlines
-set smooth
 set nowrap
+
+# Syntax highlighting (doesn't support shell expansion, so use a symlink)
+include ~/.config/nano/syntax/*.nanorc
