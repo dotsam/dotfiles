@@ -29,7 +29,7 @@
 
   # Show verbose output about tags, branches or remotes
   tags = tag -l
-  branches = branch --all
+  branches = branch --all -vv
   remotes = remote --verbose
 
   # Amend the currently staged files to the latest commit
@@ -74,7 +74,7 @@
 [branch]
 
   # Show most recently changed branches first.
- 	sort = -committerdate
+  sort = -committerdate
 
 [core]
 
@@ -202,3 +202,5 @@
   #     by the local ones
 
   path = ~/.gitconfig.local
+[init]
+	defaultBranch = main
