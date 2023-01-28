@@ -95,10 +95,23 @@ fi
 # load rbenv
 if which rbenv &> /dev/null; then eval "$(rbenv init -)"; fi
 
+# my custom php version manager (WIP)
+export PHPENV_ROOT="$HOME/.phpenv"
+if [[ -d $PHPENV_ROOT ]]; then
+  PATH="$PHPENV_ROOT/bin:$PATH"
+  eval "$(phpenv init -)"
+fi;
+
 # load nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# Base16 Shell Colours
+export BASE16_SHELL="$HOME/.config/base16-shell/"
+if [ -s "$BASE16_SHELL/profile_helper.sh" ]; then
+  source "$BASE16_SHELL/profile_helper.sh"
+fi
 
 # load atuin
 if which atuin &> /dev/null && [[ -f ~/.local/bash-preexec.sh ]]; then
