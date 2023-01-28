@@ -156,10 +156,9 @@ if [[ "$OSTYPE" == darwin* ]]; then
   # Reboot without having to unencrypt boot volume
   alias rebootfv="sudo fdesetup authrestart"
 
-  # Persistant Macbook Audio bug. Unload and reload the driver to fix
-  alias fixaudio="sudo kextunload /System/Library/Extensions/AppleHDA.kext && sudo kextload /System/Library/Extensions/AppleHDA.kext"
-
   # Easy access to the airport command line tool
   alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
 
+  # x86 homebrew
+  [ -s "/usr/local/bin/brew" ] && alias ibrew='arch -x86_64 /usr/local/bin/brew'
 fi
