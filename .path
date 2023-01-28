@@ -1,6 +1,33 @@
 # Decending order
-export PATH="/usr/bin:/usr/sbin:$PATH"
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-export PATH="$HOME/.composer/vendor/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
-#export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# homebrew base paths now handled by `brew shellenv`
+
+if [ $HOMEBREW_PREFIX ]; then
+  # Using these sparingly as they're (like it says on the tin) core utils
+  # that aren't expected to be a gnu variant on macOS
+  # find with `brew info --json=v1 --installed | jq 'map(select(.caveats | strings | contains("gnubin")) | .name)'`
+  # export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin${PATH+:$PATH}"
+  # export PATH="$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin${PATH+:$PATH}"
+  export PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin${PATH+:$PATH}"
+  export PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin${PATH+:$PATH}"
+  # export PATH="$HOMEBREW_PREFIX/opt/libtool/libexec/gnubin${PATH+:$PATH}"
+
+  # non-3 suffixed symlinks
+  export PATH="$HOMEBREW_PREFIX/opt/python3/libexec/bin${PATH+:$PATH}"
+
+  # Just newer versions, generally safer
+  # find with `brew info --json=v1 --installed | jq "map(select(.keg_only == true) | .name)"`
+  # export PATH="$HOMEBREW_PREFIX/opt/binutils/bin${PATH+:$PATH}"
+  export PATH="$HOMEBREW_PREFIX/opt/curl/bin${PATH+:$PATH}"
+  # export PATH="$HOMEBREW_PREFIX/opt/openssl@3/bin${PATH+:$PATH}"
+  export PATH="$HOMEBREW_PREFIX/opt/sqlite/bin${PATH+:$PATH}"
+  export PATH="$HOMEBREW_PREFIX/opt/ssh-copy-id/bin${PATH+:$PATH}"
+  # export PATH="$HOMEBREW_PREFIX/opt/unzip/bin${PATH+:$PATH}"
+fi
+
+# local/per user bins
+export PATH="$HOME/perl5/bin${PATH+:$PATH}";
+export PATH="$HOME/.composer/vendor/bin${PATH+:$PATH}"
+export PATH="$HOME/.local/bin${PATH+:$PATH}"
+export PATH="$HOME/bin${PATH+:$PATH}"
+# export PATH="$HOME/.config/yarn/global/node_modules/.bin${PATH+:$PATH}"
