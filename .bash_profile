@@ -4,17 +4,17 @@ case $- in
       *) return;;
 esac
 
+# Base16 Shell Colours
+export BASE16_SHELL="$HOME/.config/base16-shell/"
+if [ -s "$BASE16_SHELL/profile_helper.sh" ]; then
+  source "$BASE16_SHELL/profile_helper.sh"
+fi
+
 # Load tmux early so we don't set up a shell we're not going to really use
 if which tmux >/dev/null 2>&1; then
   if [[ -z "$TMUX" ]] && [[ "$TERM_PROGRAM" != "vscode" ]]; then
     tmux has && tmux attach || tmux new-session
   fi
-fi
-
-# Start fresh with path in a new shell via tmux
-if [ -n "$TMUX" ] && [ -f /etc/profile ]; then
-  PATH=""
-  source /etc/profile
 fi
 
 # Set up envs from brew early
@@ -123,12 +123,6 @@ fi;
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-# Base16 Shell Colours
-export BASE16_SHELL="$HOME/.config/base16-shell/"
-if [ -s "$BASE16_SHELL/profile_helper.sh" ]; then
-  source "$BASE16_SHELL/profile_helper.sh"
-fi
 
 # load atuin
 if which atuin &> /dev/null && [[ -f ~/.local/bash-preexec.sh ]]; then

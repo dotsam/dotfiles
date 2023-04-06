@@ -94,7 +94,7 @@ function digga() {
     domain=$1
   fi
   echo "Getting common DNS records for: $domain …"
-  dig +nocmd +multiline +noall +answer "$domain" ns "$domain" a "$domain" aaaa "$domain" mx "$domain" txt;
+  dig +nocmd +multiline +noall +answer "$domain" soa "$domain" ns "$domain" a "$domain" aaaa "$domain" mx "$domain" txt;
 }
 
 # whois a domain or a URL
@@ -242,23 +242,6 @@ function e() {
 rule () {
   printf "%$(tput cols)s\n"|tr " " "─"}}
 }
-
-# broot
-if hash broot &>/dev/null; then
-  function br {
-    local cmd cmd_file code
-    cmd_file=$(mktemp)
-    if broot --outcmd "$cmd_file" "$@"; then
-      cmd=$(<"$cmd_file")
-      command rm -f "$cmd_file"
-      eval "$cmd"
-    else
-      code=$?
-      command rm -f "$cmd_file"
-      return "$code"
-    fi
-  }
-fi
 
 # OS X specific
 if [[ "$OSTYPE" == darwin* ]]; then
