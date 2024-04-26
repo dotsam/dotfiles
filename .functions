@@ -90,11 +90,15 @@ function server() {
 # Run `dig` and display the most useful info
 function digga() {
   local domain=$(echo "$1" | awk -F/ '{print $3}') # get domain from URL
+  local server=""
   if [ -z $domain ] ; then
     domain=$1
   fi
+  if [ ! -z $2 ] ; then
+    server="@$2"
+  fi
   echo "Getting common DNS records for: $domain …"
-  dig +nocmd +multiline +noall +answer "$domain" soa "$domain" ns "$domain" a "$domain" aaaa "$domain" mx "$domain" txt;
+  dig +nocmd +multiline +noall +answer $server "$domain" soa "$domain" ns "$domain" a "$domain" aaaa "$domain" mx "$domain" txt;
 }
 
 # whois a domain or a URL
