@@ -11,8 +11,8 @@ if [ -s "$BASE16_SHELL/profile_helper.sh" ]; then
 fi
 
 # Load tmux early so we don't set up a shell we're not going to really use
-if which tmux >/dev/null 2>&1; then
-  if [[ -z "$TMUX" ]] && [[ "$TERM_PROGRAM" != "vscode" ]]; then
+if [[ -z "$TMUX" ]] && [[ "$TERM_PROGRAM" != "vscode" ]]; then
+  if which tmux >/dev/null 2>&1; then
     tmux has && tmux attach || tmux new-session
   fi
 fi
@@ -20,7 +20,13 @@ fi
 # Set up envs from brew early
 # TODO: Look for x86 brew too?
 if which brew &> /dev/null; then
-  eval "$(brew shellenv)"
+  # eval "$(brew shellenv)"
+  export HOMEBREW_PREFIX="/opt/homebrew";
+  export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+  export HOMEBREW_REPOSITORY="/opt/homebrew";
+  export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+  export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+  export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 fi;
 
 # Load the shell dotfiles, and then some:
