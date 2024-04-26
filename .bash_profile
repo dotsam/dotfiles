@@ -115,23 +115,13 @@ fi
 # load acme.sh
 [[ -s "$HOME/.acme.sh/acme.sh.env" ]] && source "$HOME/.acme.sh/acme.sh.env"
 
-# load rbenv
-if which rbenv &> /dev/null; then eval "$(rbenv init -)"; fi
+# asdf version manager
+[ $HOMEBREW_PREFIX ] && [ -L "$HOMEBREW_PREFIX/opt/asdf" ] && source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
 
-# my custom php version manager (WIP)
-export PHPENV_ROOT="$HOME/.phpenv"
-if [[ -d $PHPENV_ROOT ]]; then
-  PATH="$PHPENV_ROOT/bin:$PATH"
-  eval "$(phpenv init -)"
-fi;
+# ble.sh
+[ -s "$HOME/.local/share/blesh/ble.sh" ] && source "$HOME/.local/share/blesh/ble.sh"
 
-# load nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-# load atuin
-if which atuin &> /dev/null && [[ -f ~/.local/bash-preexec.sh ]]; then
-  source ~/.local/bash-preexec.sh
+# atuin
+if which atuin &> /dev/null; then
   eval "$(atuin init bash)"
 fi;
